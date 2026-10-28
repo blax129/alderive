@@ -1,8 +1,8 @@
 // Run in the head so the branded screen is present before page content paints.
 (() => {
   const root = document.documentElement;
-  let dark = true;
-  try { dark = localStorage.getItem('alderive-theme') !== 'light'; } catch (_) {}
+  let dark = false;
+  try { dark = localStorage.getItem('alderive-theme') === 'dark'; } catch (_) {}
   const asset = new URL(dark ? './images/loading-logo-dark.svg' : './images/loading-logo-light.svg', document.currentScript.src).href;
   const style = document.createElement('style');
   style.textContent = `

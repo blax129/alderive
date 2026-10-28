@@ -17,7 +17,7 @@
   }
 
   function applyTheme(theme) {
-    const selectedTheme = theme === "light" ? "light" : "dark";
+    const selectedTheme = theme === "dark" ? "dark" : "light";
     document.documentElement.dataset.theme = selectedTheme;
     localStorage.setItem(THEME_STORAGE_KEY, selectedTheme);
 
@@ -31,7 +31,7 @@
     const button = document.getElementById("theme-toggle");
     if (!button) return;
 
-    applyTheme(localStorage.getItem(THEME_STORAGE_KEY) || "dark");
+    applyTheme(localStorage.getItem(THEME_STORAGE_KEY) || "light");
     button.addEventListener("click", () => {
       applyTheme(document.documentElement.dataset.theme === "light" ? "dark" : "light");
     });
@@ -209,7 +209,7 @@
     localStorage.setItem(STORAGE_KEY, selectedLang);
     localStorage.setItem(FALLBACK_STORAGE_KEY, selectedLang);
     updateSwitcher(selectedLang);
-    updateThemeControl(document.documentElement.dataset.theme || "dark");
+    updateThemeControl(document.documentElement.dataset.theme || "light");
     updateOpenFaqHeights();
 
     window.setTimeout(() => {
