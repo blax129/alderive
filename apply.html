@@ -198,6 +198,11 @@
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
+      .co-applicant-choice { margin-top:24px; }
+      .co-applicant-fields { min-width:0; margin:24px 0 0; padding:20px 0 0; border:0; border-top:1px solid var(--stroke); }
+      .co-applicant-fields[hidden] { display:none; }
+      .co-applicant-fields legend { padding:0 0 12px; font-weight:700; }
+      .co-applicant-fields__wide { grid-column:1 / -1; }
       .form-grid--single {
         grid-template-columns: 1fr;
       }
@@ -852,6 +857,41 @@
                 </select></span>
               </label>
             </div>
+
+            <div class="co-applicant-choice">
+              <label class="field" for="hasCoApplicant">
+                <span class="field__label" data-en="Do you have a co-applicant?" data-es="¿Tiene un cosolicitante?">Do you have a co-applicant?</span>
+                <span class="application-select"><select class="field__input" id="hasCoApplicant" name="has_co_applicant" aria-controls="coApplicantFields" aria-expanded="false">
+                  <option value="no" data-en="No" data-es="No">No</option>
+                  <option value="yes" data-en="Yes" data-es="Sí">Yes</option>
+                </select></span>
+              </label>
+            </div>
+            <fieldset class="co-applicant-fields" id="coApplicantFields" hidden disabled>
+              <legend class="form-block__subtitle" data-en="Co-Applicant Information" data-es="Información del cosolicitante">Co-Applicant Information</legend>
+              <div class="form-grid">
+                <label class="field">
+                  <span class="field__label"><span data-en="Full Name" data-es="Nombre completo">Full Name</span> <span class="required-mark">*</span></span>
+                  <input class="field__input" name="co_applicant_full_name" required placeholder="Your answer" data-en-placeholder="Your answer" data-es-placeholder="Su respuesta" type="text" />
+                </label>
+                <label class="field">
+                  <span class="field__label"><span data-en="Email" data-es="Correo electrónico">Email</span> <span class="required-mark">*</span></span>
+                  <input class="field__input" name="co_applicant_email" required placeholder="Your answer" data-en-placeholder="Your answer" data-es-placeholder="Su respuesta" type="email" />
+                </label>
+                <label class="field">
+                  <span class="field__label"><span data-en="Phone Number" data-es="Número de teléfono">Phone Number</span> <span class="required-mark">*</span></span>
+                  <input class="field__input" name="co_applicant_phone" required placeholder="Your answer" data-en-placeholder="Your answer" data-es-placeholder="Su respuesta" type="tel" />
+                </label>
+                <label class="field">
+                  <span class="field__label"><span data-en="Relationship to Applicant" data-es="Relación con el solicitante">Relationship to Applicant</span> <span class="required-mark">*</span></span>
+                  <input class="field__input" name="co_applicant_relationship" required placeholder="Your answer" data-en-placeholder="Your answer" data-es-placeholder="Su respuesta" type="text" />
+                </label>
+                <label class="field co-applicant-fields__wide">
+                  <span class="field__label"><span data-en="Employment/Income Information" data-es="Información de empleo e ingresos">Employment/Income Information</span> <span class="required-mark">*</span></span>
+                  <textarea class="field__input field__input--textarea" name="co_applicant_employment_income" required placeholder="Your answer" data-en-placeholder="Your answer" data-es-placeholder="Su respuesta" rows="3"></textarea>
+                </label>
+              </div>
+            </fieldset>
           </section>
 
           <section class="form-block" aria-labelledby="residency-history">
@@ -1136,6 +1176,19 @@
         window.testEmailJS = testEmailJS;
 
         const form = document.getElementById('rentalForm');
+        const coApplicantChoice = document.getElementById('hasCoApplicant');
+        const coApplicantFields = document.getElementById('coApplicantFields');
+        function updateCoApplicant() {
+          const enabled = coApplicantChoice.value === 'yes';
+          coApplicantFields.hidden = !enabled;
+          coApplicantFields.disabled = !enabled;
+          coApplicantChoice.setAttribute('aria-expanded', String(enabled));
+        }
+        coApplicantChoice.addEventListener('change', updateCoApplicant);
+        window.addEventListener('pageshow', updateCoApplicant);
+        form.addEventListener('reset', () => setTimeout(updateCoApplicant, 0));
+        updateCoApplicant();
+
         const statusText = document.getElementById('formStatus');
         const submitButton = document.querySelector('.btn--submit');
 
