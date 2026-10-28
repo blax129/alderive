@@ -1,13 +1,16 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <script>try { document.documentElement.dataset.theme = localStorage.getItem('alderive-theme') === 'light' ? 'light' : 'dark'; } catch (_) { document.documentElement.dataset.theme = 'dark'; }</script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Payment Receipt | Private Property Holdings</title>
+    <script src="./page-loader.js?v=5"></script>
+    <title>Payment Receipt | Alderive Properties</title>
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./style.css?v=shared-pages-28" />
     <style>
       :root { color-scheme: light; }
       * { box-sizing: border-box; }
@@ -56,10 +59,8 @@
       }
       .brand-head img {
         width: min(560px, 100%);
-        aspect-ratio: 2.45;
         height: auto;
-        object-fit: cover;
-        object-position: center 40%;
+        object-fit: contain;
         display: inline-block;
       }
       .watermark {
@@ -128,40 +129,58 @@
         .doc { border: 0; box-shadow: none; border-radius: 0; }
       }
     </style>
+      <link rel="stylesheet" href="./site-theme.css?v=1" />
   </head>
-  <body>
+  <body data-en-title="Payment Receipt | Alderive Properties" data-es-title="Recibo de pago | Alderive Properties" class="site-page"><header class="header"><div class="container header__inner"><a class="back-btn" href="./index.html" data-en="← Back" data-es="← Volver">← Back</a><button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to light mode" aria-pressed="false">
+          <span class="theme-toggle__glyph" aria-hidden="true">
+            <svg class="theme-icon theme-icon--sun" viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="12" cy="12" r="4.25"></circle>
+              <g stroke-linecap="round">
+                <path d="M12 1.75v2.5M12 19.75v2.5M4.93 4.93l1.77 1.77M17.3 17.3l1.77 1.77M1.75 12h2.5M19.75 12h2.5M4.93 19.07l1.77-1.77M17.3 6.7l1.77-1.77"></path>
+              </g>
+            </svg>
+            <svg class="theme-icon theme-icon--moon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M18.5 14.5A7.5 7.5 0 0 1 9.5 5.5a7.5 7.5 0 1 0 9 9Z"></path>
+            </svg>
+          </span>
+        </button></div></header>
     <div class="wrap">
       <div class="toolbar">
-        <a href="thankyou.html">Back</a>
-        <button type="button" id="printBtn">Print / Save as PDF</button>
+        <a href="thankyou.html" data-en="Back" data-es="Volver">Back</a>
+        <button type="button" id="printBtn" data-en="Print / Save as PDF" data-es="Imprimir / Guardar PDF">Print / Save as PDF</button>
       </div>
       <article class="doc" id="receiptDoc">
         <header class="brand-head">
-          <img src="images/private-property-logo.png" alt="Private Property Holdings">
+          <img src="images/private-property-logo-dark.svg" alt="Alderive Properties">
         </header>
-        <div class="watermark" id="watermark">Pending verification</div>
-        <p class="kicker">Official receipt</p>
-        <h1 id="title">Payment proof submitted</h1>
-        <p class="badge" id="badge">Pending verification</p>
-        <p class="paid-marks"><strong>PAYMENT RECEIVED</strong><strong>PAID</strong></p>
-        <p class="notice" id="notice">This document confirms submission of payment evidence and does not confirm cleared funds.</p>
+        <div class="watermark" id="watermark" data-en="Pending verification" data-es="Pendiente de verificación">Pending verification</div>
+        <p class="kicker" data-en="Official receipt" data-es="Recibo oficial">Official receipt</p>
+        <h1 id="title" data-en="Payment proof submitted" data-es="Comprobante de pago enviado">Payment proof submitted</h1>
+        <p class="badge" id="badge" data-en="Pending verification" data-es="Pendiente de verificación">Pending verification</p>
+        <p class="paid-marks"><strong data-en="PAYMENT RECEIVED" data-es="PAGO RECIBIDO">PAYMENT RECEIVED</strong><strong data-en="PAID" data-es="PAGADO">PAID</strong></p>
+        <p class="notice" id="notice" data-en="This document confirms submission of payment evidence and does not confirm cleared funds." data-es="Este documento confirma el envío del comprobante de pago, pero no la recepción de fondos.">This document confirms submission of payment evidence and does not confirm cleared funds.</p>
         <dl>
-          <div class="row"><dt>Applicant</dt><dd id="applicantName">—</dd></div>
-          <div class="row"><dt>Property</dt><dd id="propertyAddress">—</dd></div>
-          <div class="row"><dt>Application ID</dt><dd id="applicationId">—</dd></div>
-          <div class="row"><dt>Receipt number</dt><dd id="receiptNumber">—</dd></div>
-          <div class="row"><dt>Application fee</dt><dd id="fee">$70 per adult</dd></div>
-          <div class="row"><dt>Amount received</dt><dd id="receivedAmount">Pending confirmation</dd></div>
-          <div class="row"><dt>Submitted</dt><dd id="submittedAt">—</dd></div>
-          <div class="row status"><dt>Status</dt><dd id="status">Pending verification</dd></div>
+          <div class="row"><dt data-en="Applicant" data-es="Solicitante">Applicant</dt><dd id="applicantName">—</dd></div>
+          <div class="row"><dt data-en="Property" data-es="Propiedad">Property</dt><dd id="propertyAddress">—</dd></div>
+          <div class="row"><dt data-en="Application ID" data-es="ID de solicitud">Application ID</dt><dd id="applicationId">—</dd></div>
+          <div class="row"><dt data-en="Receipt number" data-es="Número de recibo">Receipt number</dt><dd id="receiptNumber">—</dd></div>
+          <div class="row"><dt data-en="Application fee" data-es="Cargo de solicitud">Application fee</dt><dd id="fee" data-en="$70 per adult" data-es="$70 por adulto">$70 per adult</dd></div>
+          <div class="row"><dt data-en="Amount received" data-es="Importe recibido">Amount received</dt><dd id="receivedAmount" data-en="Pending confirmation" data-es="Pendiente de confirmación">Pending confirmation</dd></div>
+          <div class="row"><dt data-en="Submitted" data-es="Enviado">Submitted</dt><dd id="submittedAt">—</dd></div>
+          <div class="row status"><dt data-en="Status" data-es="Estado">Status</dt><dd id="status" data-en="Pending verification" data-es="Pendiente de verificación">Pending verification</dd></div>
         </dl>
       </article>
     </div>
     <script src="./script.js"></script>
     <script>
-      (function () {
+      document.addEventListener("DOMContentLoaded", function () {
+        const spanish = localStorage.getItem("lang") === "es";
+        const copy = {"Receipt unavailable": "Recibo no disponible", "Open this page from your payment confirmation link.": "Abra esta página desde el enlace de confirmación de su pago.", "Payment received": "Pago recibido", "Paid": "Pagado", "Payment confirmed": "Pago confirmado", "This receipt confirms the amount received as verified by Alderive Properties.": "Este recibo confirma el importe recibido y verificado por Alderive Properties.", "Payment proof rejected": "Comprobante de pago rechazado", "Rejected": "Rechazado", "We could not verify the submitted payment evidence. Please confirm the payment details and upload a clearer or correct screenshot from your payment page.": "No pudimos verificar el comprobante enviado. Confirme los datos del pago y suba una captura más clara o correcta desde su página de pago.", "Pending verification": "Pendiente de verificación", "No receipt number was provided.": "No se proporcionó un número de recibo.", "Pending verification — this is not confirmation of cleared funds.": "Pendiente de verificación: no confirma la recepción de fondos.", "Payment confirmed.": "Pago confirmado.", "Payment proof rejected.": "Comprobante de pago rechazado.", "Unable to check this receipt right now.": "No se puede consultar este recibo en este momento."};
+        const t = text => spanish ? (copy[text] || text) : text;
         const params = new URLSearchParams(window.location.search);
         const token = params.get('token') || localStorage.getItem('applicationAccessToken') || '';
+        const backLink = document.querySelector('.toolbar a');
+        if (token) backLink.href = 'application-received.html?token=' + encodeURIComponent(token);
         const printBtn = document.getElementById('printBtn');
         if (printBtn) printBtn.addEventListener('click', function () { window.print(); });
 
@@ -180,14 +199,14 @@
         }
 
         if (!token || typeof window.loadApplicationRecord !== 'function') {
-          document.getElementById('title').textContent = 'Receipt unavailable';
-          document.getElementById('notice').textContent = 'Open this page from your payment confirmation link.';
+          document.getElementById('title').textContent = t("Receipt unavailable");
+          document.getElementById('notice').textContent = t("Open this page from your payment confirmation link.");
           return;
         }
 
         window.loadApplicationRecord(token).then(function (record) {
           if (!record) {
-            document.getElementById('title').textContent = 'Receipt unavailable';
+            document.getElementById('title').textContent = t("Receipt unavailable");
             return;
           }
           const status = record.proof_status || '';
@@ -197,28 +216,28 @@
           fill('applicationId', record.application_id);
           fill('receiptNumber', record.receipt_number);
           const fee = Number(record.application_fee);
-          fill('fee', (Number.isFinite(fee) ? '$' + fee.toFixed(0) : '$70') + ' per adult');
+          fill('fee', (Number.isFinite(fee) ? '$' + fee.toFixed(0) : '$70') + (spanish ? ' por adulto' : ' per adult'));
           fill('submittedAt', when(record.submitted_at));
           if (status === 'paid') {
             doc.classList.add('is-paid');
-            fill('title', 'Payment received');
-            fill('badge', 'Paid');
-            fill('status', 'Payment confirmed');
+            fill('title', t("Payment received"));
+            fill('badge', t("Paid"));
+            fill('status', t("Payment confirmed"));
             fill('receivedAmount', money(record.confirmed_amount != null ? record.confirmed_amount : record.receipt_amount));
-            fill('notice', 'This receipt confirms the amount received as verified by Private Property Holdings.');
+            fill('notice', t("This receipt confirms the amount received as verified by Alderive Properties."));
           } else if (status === 'rejected') {
             doc.classList.add('is-rejected');
-            fill('title', 'Payment proof rejected');
-            fill('badge', 'Rejected');
-            fill('status', 'Payment proof rejected');
-            fill('notice', 'We could not verify the submitted payment evidence. Please confirm the payment details and upload a clearer or correct screenshot from your payment page.');
+            fill('title', t("Payment proof rejected"));
+            fill('badge', t("Rejected"));
+            fill('status', t("Payment proof rejected"));
+            fill('notice', t("We could not verify the submitted payment evidence. Please confirm the payment details and upload a clearer or correct screenshot from your payment page."));
           } else {
-            fill('status', 'Pending verification');
+            fill('status', t("Pending verification"));
           }
-        }).catch(function () {
-          document.getElementById('title').textContent = 'Receipt unavailable';
+        }).catchdocument.addEventListener("DOMContentLoaded", function () {
+          document.getElementById('title').textContent = t("Receipt unavailable");
         });
-      })();
+      });
     </script>
   </body>
 </html>

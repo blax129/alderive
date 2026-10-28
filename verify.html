@@ -1,10 +1,14 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <script>try { document.documentElement.dataset.theme = localStorage.getItem('alderive-theme') === 'light' ? 'light' : 'dark'; } catch (_) { document.documentElement.dataset.theme = 'dark'; }</script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Receipt status | Private Property Holdings</title>
+    <script src="./page-loader.js?v=5"></script>
+    <title>Receipt status | Alderive Properties</title>
     <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="stylesheet" href="./style.css?v=shared-pages-28" />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
     <style>
       body { margin: 0; font-family: system-ui, sans-serif; background: #0a1628; color: #f8fafc; min-height: 100vh; display: grid; place-items: center; padding: 24px; }
       .card { width: min(420px, 100%); background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.12); border-radius: 18px; padding: 28px; text-align: center; }
@@ -12,36 +16,52 @@
       p { margin: 0; color: rgba(248,250,252,0.72); }
       strong { color: #dce3ea; }
     </style>
+      <link rel="stylesheet" href="./site-theme.css?v=1" />
   </head>
-  <body>
+  <body data-en-title="Receipt status | Alderive Properties" data-es-title="Estado del recibo | Alderive Properties" class="site-page receipt-status-page"><header class="header"><div class="container header__inner"><a class="back-btn" href="./index.html" data-en="← Back" data-es="← Volver">← Back</a><button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to light mode" aria-pressed="false">
+          <span class="theme-toggle__glyph" aria-hidden="true">
+            <svg class="theme-icon theme-icon--sun" viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="12" cy="12" r="4.25"></circle>
+              <g stroke-linecap="round">
+                <path d="M12 1.75v2.5M12 19.75v2.5M4.93 4.93l1.77 1.77M17.3 17.3l1.77 1.77M1.75 12h2.5M19.75 12h2.5M4.93 19.07l1.77-1.77M17.3 6.7l1.77-1.77"></path>
+              </g>
+            </svg>
+            <svg class="theme-icon theme-icon--moon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M18.5 14.5A7.5 7.5 0 0 1 9.5 5.5a7.5 7.5 0 1 0 9 9Z"></path>
+            </svg>
+          </span>
+        </button></div></header>
     <div class="card">
-      <h1>Receipt verification</h1>
-      <p id="statusLine">Checking status…</p>
+      <h1 data-en="Receipt verification" data-es="Verificación de recibo">Receipt verification</h1>
+      <p id="statusLine" data-en="Checking status…" data-es="Consultando estado…">Checking status…</p>
     </div>
     <script src="./script.js"></script>
     <script>
-      (function () {
+      document.addEventListener("DOMContentLoaded", function () {
+        const spanish = localStorage.getItem("lang") === "es";
+        const copy = {"Receipt unavailable": "Recibo no disponible", "Open this page from your payment confirmation link.": "Abra esta página desde el enlace de confirmación de su pago.", "Payment received": "Pago recibido", "Paid": "Pagado", "Payment confirmed": "Pago confirmado", "This receipt confirms the amount received as verified by Alderive Properties.": "Este recibo confirma el importe recibido y verificado por Alderive Properties.", "Payment proof rejected": "Comprobante de pago rechazado", "Rejected": "Rechazado", "We could not verify the submitted payment evidence. Please confirm the payment details and upload a clearer or correct screenshot from your payment page.": "No pudimos verificar el comprobante enviado. Confirme los datos del pago y suba una captura más clara o correcta desde su página de pago.", "Pending verification": "Pendiente de verificación", "No receipt number was provided.": "No se proporcionó un número de recibo.", "Pending verification — this is not confirmation of cleared funds.": "Pendiente de verificación: no confirma la recepción de fondos.", "Payment confirmed.": "Pago confirmado.", "Payment proof rejected.": "Comprobante de pago rechazado.", "Unable to check this receipt right now.": "No se puede consultar este recibo en este momento."};
+        const t = text => spanish ? (copy[text] || text) : text;
         const receipt = new URLSearchParams(window.location.search).get('r') || '';
         const line = document.getElementById('statusLine');
         if (!receipt) {
-          line.textContent = 'No receipt number was provided.';
+          line.textContent = t("No receipt number was provided.");
           return;
         }
         window.getPublicReceiptStatus(receipt).then(function (data) {
           if (!data) {
-            line.innerHTML = 'Receipt <strong>' + receipt + '</strong> was not found.';
+            line.textContent = spanish ? 'No se encontró el recibo ' + receipt + '.' : 'Receipt ' + receipt + ' was not found.';
             return;
           }
           const labels = {
-            pending: 'Pending verification — this is not confirmation of cleared funds.',
-            paid: 'Payment confirmed.',
-            rejected: 'Payment proof rejected.',
+            pending: t("Pending verification \u2014 this is not confirmation of cleared funds."),
+            paid: t("Payment confirmed."),
+            rejected: t("Payment proof rejected."),
           };
-          line.innerHTML = '<strong>' + data.receipt_number + '</strong><br>' + (labels[data.status] || data.status);
-        }).catch(function () {
-          line.textContent = 'Unable to check this receipt right now.';
+          line.textContent = data.receipt_number + ': ' + (labels[data.status] || data.status);
+        }).catchdocument.addEventListener("DOMContentLoaded", function () {
+          line.textContent = t("Unable to check this receipt right now.");
         });
-      })();
+      });
     </script>
   </body>
 </html>

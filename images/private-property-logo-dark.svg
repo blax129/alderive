@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 180" role="img" aria-labelledby="logoTitle logoDesc">
+  <title id="logoTitle">Alderive Properties</title>
+  <desc id="logoDesc">Architectural A monogram in mint and copper beside the Alderive Properties wordmark.</desc>
+  <g transform="translate(22 18)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M12 126 68 20l56 106" stroke="#83C7A5" stroke-width="12"/>
+    <path d="M43 82h50M68 82v44" stroke="#C97852" stroke-width="10"/>
+    <path d="M50 126h36" stroke="#83C7A5" stroke-width="8"/>
+    <circle cx="68" cy="19" r="6" fill="#C97852" stroke="none"/>
+  </g>
+  <text x="178" y="83" fill="#F5F2E8" font-family="'Playfair Display', Georgia, 'Times New Roman', serif" font-size="50" font-weight="700" letter-spacing="2">ALDERIVE</text>
+  <text x="178" y="142" fill="#83C7A5" font-family="Manrope, Arial, sans-serif" font-size="36" font-weight="700" letter-spacing="3">PROPERTIES</text>
+</svg>

@@ -1,8 +1,10 @@
 <!doctype html>
 <html lang="es">
   <head>
+    <script>try { document.documentElement.dataset.theme = localStorage.getItem('alderive-theme') === 'light' ? 'light' : 'dark'; } catch (_) { document.documentElement.dataset.theme = 'dark'; }</script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="./page-loader.js?v=5"></script>
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="icon" href="/images/favicon-32.png" type="image/png" sizes="32x32" />
     <link rel="apple-touch-icon" href="/images/apple-touch-icon.png" />
@@ -10,35 +12,41 @@
     <meta name="theme-color" content="#2F4A6D" />
     <meta
       name="description"
-      content="Administración Privada de Propiedades — Coordinación profesional y transparente de alquileres para propiedades administradas de forma privada."
+      content="Alderive Properties — Coordinación profesional y transparente de alquileres para propiedades administradas de forma privada."
     />
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="Private Property Holdings" />
+    <meta property="og:site_name" content="Alderive Properties" />
     <meta property="og:locale" content="es_ES" />
-    <meta property="og:title" content="Administración Privada de Propiedades" />
+    <meta property="og:title" content="Alderive Properties" />
     <meta property="og:description" content="Coordinación profesional y transparente de alquileres para propiedades administradas de forma privada." />
     <meta property="og:image" content="/images/og-image.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Logotipo de Private Property Holdings" />
+    <meta property="og:image:alt" content="Logotipo de Alderive Properties" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Administración Privada de Propiedades" />
+    <meta name="twitter:title" content="Alderive Properties" />
     <meta name="twitter:description" content="Coordinación profesional y transparente de alquileres para propiedades administradas de forma privada." />
     <meta name="twitter:image" content="/images/og-image.png" />
-    <meta name="twitter:image:alt" content="Logotipo de Private Property Holdings" />
+    <meta name="twitter:image:alt" content="Logotipo de Alderive Properties" />
     <link rel="alternate" href="index.html" hreflang="en" />
     <link rel="alternate" href="es.html" hreflang="es" />
-    <title>Administración Privada de Propiedades</title>
+    <title>Alderive Properties</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="./style.css" />
+    <script>
+      try {
+        document.documentElement.dataset.theme = localStorage.getItem("alderive-theme") === "light" ? "light" : "dark";
+      } catch {}
+    </script>
+    <link rel="preload" as="image" href="./images/home-neighborhood.jpg" fetchpriority="high" />
+    <link rel="stylesheet" href="./style.css?v=refined-navigation-26" />
     <style>
       .header .brand {
-        margin-left: -70px;
+        margin-left: 0;
       }
 
       .brand__logo {
@@ -49,71 +57,161 @@
 
       @media (max-width: 768px) {
         .header .brand {
-          margin-left: -40px;
+          margin-left: 0;
         }
       }
     </style>
+      <link rel="stylesheet" href="./site-theme.css?v=1" />
   </head>
-  <body class="home-with-floating-apply">
+  <body class="site-page home-with-floating-apply home-intro-editorial">
     <a class="skip-link" href="#main">Saltar al contenido</a>
 
     <header class="header">
       <div class="container header__inner">
-        <a class="brand" href="./es.html" aria-label="Inicio de Administración Privada de Propiedades">
-          <img class="brand__logo" src="./images/private-property-logo.svg" alt="Logotipo de Administración Privada de Propiedades" />
+        <a class="brand" href="./es.html" aria-label="Inicio de Alderive Properties">
+          <img class="brand__logo" src="./images/private-property-logo-dark.svg" data-logo-light="./images/private-property-logo.svg" data-logo-dark="./images/private-property-logo-dark.svg" alt="Logotipo de Alderive Properties" />
         </a>
-
-        <button class="hamburger" type="button" onclick="toggleMenu()" aria-label="Abrir menú" aria-expanded="false" aria-controls="nav" id="nav-toggle">☰</button>
-
-        <nav class="nav" id="nav">
-          <a href="#leasing">Proceso de alquiler</a>
-          <a href="#services">Servicios</a>
-          <a href="#process">Preguntas frecuentes</a>
-          <a href="#contact">Contacto</a>
-          <div class="header__actions header__actions--mobile">
-            <div class="language-toggle" aria-label="Selector de idioma">
-              <a class="lang-option" data-lang="en" href="./index.html" onclick="localStorage.setItem('lang','en'); localStorage.setItem('siteLanguage','en');"><span class="lang-flag" aria-hidden="true">🇺🇸</span><span>EN</span></a>
-              <span class="lang-separator">|</span>
-              <a class="lang-option active" data-lang="es" href="./es.html"><span class="lang-flag" aria-hidden="true">🇪🇸</span><span>ES</span></a>
-            </div>
-          </div>
-        </nav>
-
-        <div class="header__actions header__actions--desktop">
-          <div class="language-toggle" aria-label="Selector de idioma">
-            <a class="lang-option" data-lang="en" href="./index.html" onclick="localStorage.setItem('lang','en'); localStorage.setItem('siteLanguage','en');"><span class="lang-flag" aria-hidden="true">🇺🇸</span><span>EN</span></a>
-            <span class="lang-separator">|</span>
-            <a class="lang-option active" data-lang="es" href="./es.html"><span class="lang-flag" aria-hidden="true">🇪🇸</span><span>ES</span></a>
-          </div>
+        <div class="home-header-controls">
+        <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Cambiar a modo claro" aria-pressed="false">
+          <span class="theme-toggle__glyph" aria-hidden="true">
+            <svg class="theme-icon theme-icon--sun" viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="12" cy="12" r="4.25"></circle>
+              <g stroke-linecap="round">
+                <path d="M12 1.75v2.5M12 19.75v2.5M4.93 4.93l1.77 1.77M17.3 17.3l1.77 1.77M1.75 12h2.5M19.75 12h2.5M4.93 19.07l1.77-1.77M17.3 6.7l1.77-1.77"></path>
+              </g>
+            </svg>
+            <svg class="theme-icon theme-icon--moon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M18.5 14.5A7.5 7.5 0 0 1 9.5 5.5a7.5 7.5 0 1 0 9 9Z"></path>
+            </svg>
+          </span>
+        </button>
+          <details class="section-menu">
+            <summary aria-label="Menú"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg><span>Menú</span></summary>
+            <nav class="section-menu__panel" aria-label="Navegación principal">
+              <p class="section-menu__eyebrow">EXPLORA ALDERIVE</p>
+              <a href="#services">Servicios</a>
+<a href="#why-work">Por qué elegirnos</a>
+<a href="#leasing">Proceso de alquiler</a>
+<a href="#process">Preguntas frecuentes</a>
+<a href="#testimonials">Opiniones</a>
+<a href="#contact">Contacto</a>
+              <p class="section-menu__language-label">Idioma</p>
+              <div class="persistent-language" aria-label="Idioma">
+                <a href="./index.html" data-page-language="en" lang="en" ><span aria-hidden="true">🇺🇸</span> English</a>
+                <a href="./es.html" data-page-language="es" lang="es" aria-current="page"><span aria-hidden="true">🇪🇸</span> Español</a>
+              </div>
+            </nav>
+          </details>
         </div>
       </div>
     </header>
 
-    <main id="main">
+<main id="main">
       <section class="hero portfolio-hero">
         <div class="portfolio-hero__media" aria-hidden="true">
-          <img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1800&q=82" alt="" />
+          <img src="./images/home-neighborhood.jpg" alt="" loading="eager" fetchpriority="high" decoding="async" />
+          <video class="portfolio-hero__video" muted playsinline preload="none" data-src="./videos/home-neighborhood.mp4"></video>
+          <video class="portfolio-hero__video" muted playsinline preload="none" data-src="./videos/home-living-room.mp4"></video>
+          <video class="portfolio-hero__video" muted playsinline preload="none" data-src="./videos/home-interior.mp4"></video>
+          <video class="portfolio-hero__video" muted playsinline preload="none" data-src="./videos/home-bedroom.mp4"></video>
         </div>
         <div class="container portfolio-hero__inner">
           <div class="hero__content reveal">
             <section class="hero-overview" aria-label="Introducción a la gestión privada de alquileres">
-              <h1 class="hero-overview__title">Administración Privada de Propiedades</h1>
-              <p>
-                Administración Privada de Propiedades ofrece apoyo confiable de
-                alquiler para viviendas administradas de forma privada y
-                posibles inquilinos, con consistencia, claridad y
-                responsabilidad en cada etapa del proceso de arrendamiento.
-              </p>
-              <p>
-                Desde las primeras consultas y la programación hasta la
-                orientación de la solicitud y la comunicación continua, nuestro
-                proceso es organizado y orientado al servicio. Establecemos
-                expectativas claras, damos seguimiento oportuno y coordinamos con
-                cuidado para que propietarios y solicitantes vivan un proceso
-                fluido, eficiente y respetuoso.
-              </p>
+              <div class="hero-overview__heading">
+                <p class="hero-overview__eyebrow">GESTIÓN DE PROPIEDADES PRIVADAS</p>
+                <h1 class="hero-overview__title">Alderive <em>Properties</em></h1>
+              </div>
+              <div class="hero-overview__copy">
+                <p>
+                  Alderive Properties ofrece un apoyo confiable para viviendas
+                  administradas de forma privada y futuros inquilinos, con
+                  constancia, claridad y responsabilidad durante todo el proceso
+                  de alquiler.
+                </p>
+                <p>
+                  Desde las primeras consultas y la programación hasta la
+                  orientación sobre solicitudes y la comunicación continua,
+                  nuestro proceso está organizado y orientado al servicio.
+                  Establecemos expectativas claras, respondemos con prontitud y
+                  coordinamos con cuidado para que propietarios y solicitantes
+                  vivan un recorrido fluido, eficiente y respetuoso.
+                </p>
+              </div>
+              <ul class="hero-overview__principles" aria-label="Nuestro enfoque">
+                <li><span aria-hidden="true">01</span><strong>Constancia</strong></li>
+                <li><span aria-hidden="true">02</span><strong>Claridad</strong></li>
+                <li><span aria-hidden="true">03</span><strong>Responsabilidad</strong></li>
+              </ul>
             </section>
           </div>
+        </div>
+      </section>
+
+      <section id="markets" class="section rental-markets" aria-labelledby="rental-markets-title">
+        <div class="container">
+          <details class="rental-markets__dropdown">
+            <summary class="rental-markets__summary">
+              <span class="rental-markets__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M19 10c0 5-7 11-7 11S5 15 5 10a7 7 0 1 1 14 0Z"/><circle cx="12" cy="10" r="2.5"/></svg></span>
+              <span class="rental-markets__heading">
+                <span class="rental-markets__label" id="rental-markets-title">Mercados de alquiler actuales</span>
+                <span class="rental-markets__description">Explora nuestros mercados por estado</span>
+              </span>
+              <span class="rental-markets__toggle" aria-hidden="true"><span class="rental-markets__chevron"></span></span>
+            </summary>
+            <ul class="rental-markets__list" aria-labelledby="rental-markets-title" tabindex="0">
+              <li>Alabama</li>
+              <li>Alaska</li>
+              <li>Arizona</li>
+              <li>Arkansas</li>
+              <li>California</li>
+              <li>Colorado</li>
+              <li>Connecticut</li>
+              <li>Delaware</li>
+              <li>Florida</li>
+              <li>Georgia</li>
+              <li>Hawái</li>
+              <li>Idaho</li>
+              <li>Illinois</li>
+              <li>Indiana</li>
+              <li>Iowa</li>
+              <li>Kansas</li>
+              <li>Kentucky</li>
+              <li>Luisiana</li>
+              <li>Maine</li>
+              <li>Maryland</li>
+              <li>Massachusetts</li>
+              <li>Míchigan</li>
+              <li>Minnesota</li>
+              <li>Misisipi</li>
+              <li>Misuri</li>
+              <li>Montana</li>
+              <li>Nebraska</li>
+              <li>Nevada</li>
+              <li>Nuevo Hampshire</li>
+              <li>Nueva Jersey</li>
+              <li>Nuevo México</li>
+              <li>Nueva York</li>
+              <li>Carolina del Norte</li>
+              <li>Dakota del Norte</li>
+              <li>Ohio</li>
+              <li>Oklahoma</li>
+              <li>Oregón</li>
+              <li>Pensilvania</li>
+              <li>Rhode Island</li>
+              <li>Carolina del Sur</li>
+              <li>Dakota del Sur</li>
+              <li>Tennessee</li>
+              <li>Texas</li>
+              <li>Utah</li>
+              <li>Vermont</li>
+              <li>Virginia</li>
+              <li>Washington</li>
+              <li>Virginia Occidental</li>
+              <li>Wisconsin</li>
+              <li>Wyoming</li>
+            </ul>
+          </details>
         </div>
       </section>
 
@@ -125,53 +223,70 @@
 
           <div class="services-grid">
             <article class="service-card reveal">
-              <span class="service-card__number">01</span>
+              <span class="service-card__number" aria-hidden="true">01</span>
               <h3>Evaluación de inquilinos y revisión de solicitudes</h3>
             </article>
             <article class="service-card reveal">
-              <span class="service-card__number">02</span>
+              <span class="service-card__number" aria-hidden="true">02</span>
               <h3>Apoyo para anuncios y mercadeo de alquileres</h3>
             </article>
             <article class="service-card reveal">
-              <span class="service-card__number">03</span>
+              <span class="service-card__number" aria-hidden="true">03</span>
               <h3>Coordinación de contrato</h3>
             </article>
             <article class="service-card reveal">
-              <span class="service-card__number">04</span>
+              <span class="service-card__number" aria-hidden="true">04</span>
               <h3>Programación de recorridos de propiedades</h3>
             </article>
             <article class="service-card reveal">
-              <span class="service-card__number">05</span>
+              <span class="service-card__number" aria-hidden="true">05</span>
               <h3>Gestión de consultas de alquiler y comunicación con inquilinos</h3>
             </article>
             <article class="service-card reveal">
-              <span class="service-card__number">06</span>
+              <span class="service-card__number" aria-hidden="true">06</span>
               <h3>Guía para solicitantes durante el proceso de aprobación</h3>
             </article>
           </div>
         </div>
       </section>
 
-      <section class="section why-work" aria-labelledby="why-work-title">
+      <section id="why-work" class="section why-work" aria-labelledby="why-work-title">
         <div class="container">
           <div class="section__header section__header--center reveal">
-            <h2 id="why-work-title" class="section__title">Por qué trabajar con Administración Privada de Propiedades</h2>
+            <h2 id="why-work-title" class="section__title">Por qué trabajar con Alderive Properties</h2>
           </div>
 
-          <figure class="why-work__media reveal">
-            <div class="community-slider why-work__slider" aria-label="Fotos del equipo de Administración Privada de Propiedades">
-              <img class="slide active" src="./images/community-team.jpg" alt="Equipo de Administración Privada de Propiedades colaborando juntos" />
-              <img class="slide" src="./images/community-advocates.jpg" alt="Equipo de Administración Privada de Propiedades en un evento de apoyo comunitario" />
-              <img class="slide" src="./images/community-erpac-team.jpg" alt="Equipo de Administración Privada de Propiedades en una reunión de ERPAC" />
-            </div>
-          </figure>
-
           <ul class="why-work__list">
-            <li class="why-work__item reveal">Proceso de administración de alquiler profesional y organizado</li>
-            <li class="why-work__item reveal">Comunicación clara y transparente</li>
-            <li class="why-work__item reveal">Apoyo receptivo para solicitantes y consultas</li>
-            <li class="why-work__item reveal">Coordinación confiable entre inquilinos y propietarios</li>
-            <li class="why-work__item reveal">Enfoque en profesionalismo y experiencias de alquiler fluidas</li>
+            <li class="why-work__item reveal">
+              <span class="why-work__eyebrow">Nuestra diferencia</span>
+              <span class="why-work__number" aria-hidden="true">01</span>
+              <h3 class="why-work__benefit">Organización desde el inicio</h3>
+              <p class="why-work__description">Proceso de administración de alquiler profesional y organizado</p>
+            </li>
+            <li class="why-work__item reveal">
+              <span class="why-work__eyebrow">Nuestra diferencia</span>
+              <span class="why-work__number" aria-hidden="true">02</span>
+              <h3 class="why-work__benefit">Claridad en cada paso</h3>
+              <p class="why-work__description">Comunicación clara y transparente</p>
+            </li>
+            <li class="why-work__item reveal">
+              <span class="why-work__eyebrow">Nuestra diferencia</span>
+              <span class="why-work__number" aria-hidden="true">03</span>
+              <h3 class="why-work__benefit">Apoyo cuando importa</h3>
+              <p class="why-work__description">Apoyo receptivo para solicitantes y consultas</p>
+            </li>
+            <li class="why-work__item reveal">
+              <span class="why-work__eyebrow">Nuestra diferencia</span>
+              <span class="why-work__number" aria-hidden="true">04</span>
+              <h3 class="why-work__benefit">Todos en sintonía</h3>
+              <p class="why-work__description">Coordinación confiable entre inquilinos y propietarios</p>
+            </li>
+            <li class="why-work__item reveal">
+              <span class="why-work__eyebrow">Nuestra diferencia</span>
+              <span class="why-work__number" aria-hidden="true">05</span>
+              <h3 class="why-work__benefit">Un alquiler más sencillo</h3>
+              <p class="why-work__description">Enfoque en profesionalismo y experiencias de alquiler fluidas</p>
+            </li>
           </ul>
         </div>
       </section>
@@ -182,36 +297,57 @@
             <h2 class="section__title">Cómo funciona el proceso de alquiler</h2>
           </div>
 
-          <ol class="rental-process__cards process-grid">
-            <li class="rental-process__card reveal">
-              <span class="process-step">01</span>
-              <h3 class="rental-process__title">Ver detalles de la propiedad</h3>
+          <ol class="rental-process__cards process-grid process-dropdowns">
+            <li class="rental-process__card">
+              <details class="process-dropdown">
+                <summary>
+                  <span class="process-step" aria-hidden="true">01</span>
+                  <h3 class="rental-process__title">Ver detalles de la propiedad</h3>
+                  <span class="process-dropdown__action"><span class="process-dropdown__closed">Ver detalles</span><span class="process-dropdown__open">Ocultar detalles</span><span class="process-dropdown__chevron" aria-hidden="true"></span></span>
+                </summary>
+                <p class="rental-process__text">Revise los detalles de la propiedad antes de comenzar su solicitud.</p>
+              </details>
             </li>
 
-            <li class="rental-process__card reveal">
-              <span class="process-step">02</span>
-              <h3 class="rental-process__title">Enviar solicitud</h3>
-              <p class="rental-process__text">
+            <li class="rental-process__card">
+              <details class="process-dropdown">
+                <summary>
+                  <span class="process-step" aria-hidden="true">02</span>
+                  <h3 class="rental-process__title">Enviar solicitud</h3>
+                  <span class="process-dropdown__action"><span class="process-dropdown__closed">Ver detalles</span><span class="process-dropdown__open">Ocultar detalles</span><span class="process-dropdown__chevron" aria-hidden="true"></span></span>
+                </summary>
+                <p class="rental-process__text">
                 Complete el formulario de solicitud de alquiler con información precisa.
               </p>
+              </details>
             </li>
 
-            <li class="rental-process__card reveal">
-              <span class="process-step">03</span>
-              <h3 class="rental-process__title">Pago reembolsable de solicitud</h3>
-              <p class="rental-process__text">
+            <li class="rental-process__card">
+              <details class="process-dropdown">
+                <summary>
+                  <span class="process-step" aria-hidden="true">03</span>
+                  <h3 class="rental-process__title">Pago reembolsable de solicitud</h3>
+                  <span class="process-dropdown__action"><span class="process-dropdown__closed">Ver detalles</span><span class="process-dropdown__open">Ocultar detalles</span><span class="process-dropdown__chevron" aria-hidden="true"></span></span>
+                </summary>
+                <p class="rental-process__text">
                 Un cargo de solicitud reembolsable es un pago que se le devolverá si
                 su solicitud no es aprobada o si decide no continuar después del recorrido.
               </p>
+              </details>
             </li>
 
-            <li class="rental-process__card reveal">
-              <span class="process-step">04</span>
-              <h3 class="rental-process__title">Próximos pasos</h3>
-              <p class="rental-process__text">
+            <li class="rental-process__card">
+              <details class="process-dropdown">
+                <summary>
+                  <span class="process-step" aria-hidden="true">04</span>
+                  <h3 class="rental-process__title">Próximos pasos</h3>
+                  <span class="process-dropdown__action"><span class="process-dropdown__closed">Ver detalles</span><span class="process-dropdown__open">Ocultar detalles</span><span class="process-dropdown__chevron" aria-hidden="true"></span></span>
+                </summary>
+                <p class="rental-process__text">
                 Los solicitantes calificados serán contactados con actualizaciones,
                 detalles del recorrido o instrucciones adicionales.
               </p>
+              </details>
             </li>
           </ol>
 
@@ -226,6 +362,7 @@
 
           <div class="faq-list">
             <article class="faq-item reveal">
+              <span class="faq-item__number" aria-hidden="true">01</span>
               <button class="faq-item__question" type="button" aria-expanded="false">
                 <span>¿Cómo solicito un alquiler?</span>
                 <span class="faq-item__icon" aria-hidden="true"></span>
@@ -239,6 +376,7 @@
             </article>
 
             <article class="faq-item reveal">
+              <span class="faq-item__number" aria-hidden="true">02</span>
               <button class="faq-item__question" type="button" aria-expanded="false">
                 <span>¿Hay un cargo de solicitud?</span>
                 <span class="faq-item__icon" aria-hidden="true"></span>
@@ -252,6 +390,7 @@
             </article>
 
             <article class="faq-item reveal">
+              <span class="faq-item__number" aria-hidden="true">03</span>
               <button class="faq-item__question" type="button" aria-expanded="false">
                 <span>¿Los anuncios siempre están disponibles?</span>
                 <span class="faq-item__icon" aria-hidden="true"></span>
@@ -264,6 +403,7 @@
             </article>
 
             <article class="faq-item reveal">
+              <span class="faq-item__number" aria-hidden="true">04</span>
               <button class="faq-item__question" type="button" aria-expanded="false">
                 <span>¿Cómo me contactarán después de solicitar?</span>
                 <span class="faq-item__icon" aria-hidden="true"></span>
@@ -290,10 +430,10 @@
           <div class="testimonial-list" id="testimonialList">
             <article class="testimonial-card reveal">
               <div class="testimonial-card__header">
-                <span class="testimonial-card__avatar testimonial-card__avatar--green" aria-hidden="true">TM</span>
+                <img class="testimonial-card__avatar" src="images/applicant-avatars/profile.svg" alt="" width="42" height="42" loading="lazy" decoding="async" />
                 <div class="testimonial-card__meta">
-                  <p class="testimonial-card__name">Tyler M.</p>
-                  <p class="testimonial-card__date">16 de marzo de 2025</p>
+                  <p class="testimonial-card__name">Kenna K.</p>
+                  <p class="testimonial-card__date">16 de marzo de 2026</p>
                 </div>
               </div>
               <p class="testimonial-card__quote">Solicité un domingo y recibí respuesta el lunes por la mañana. Proceso sencillo.</p>
@@ -301,10 +441,10 @@
 
             <article class="testimonial-card reveal">
               <div class="testimonial-card__header">
-                <span class="testimonial-card__avatar testimonial-card__avatar--purple" aria-hidden="true">RK</span>
+                <img class="testimonial-card__avatar" src="images/applicant-avatars/profile.svg" alt="" width="42" height="42" loading="lazy" decoding="async" />
                 <div class="testimonial-card__meta">
-                  <p class="testimonial-card__name">Ryan K.</p>
-                  <p class="testimonial-card__date">2 de abril de 2025</p>
+                  <p class="testimonial-card__name">Donise L.</p>
+                  <p class="testimonial-card__date">2 de abril de 2026</p>
                 </div>
               </div>
               <p class="testimonial-card__quote">Me explicaron la tarifa y la política de reembolso de antemano. Sin sorpresas.</p>
@@ -312,10 +452,10 @@
 
             <article class="testimonial-card reveal">
               <div class="testimonial-card__header">
-                <span class="testimonial-card__avatar testimonial-card__avatar--teal" aria-hidden="true">ML</span>
+                <img class="testimonial-card__avatar" src="images/applicant-avatars/profile.svg" alt="" width="42" height="42" loading="lazy" decoding="async" />
                 <div class="testimonial-card__meta">
-                  <p class="testimonial-card__name">Melissa L.</p>
-                  <p class="testimonial-card__date">18 de mayo de 2025</p>
+                  <p class="testimonial-card__name">Esteban S.</p>
+                  <p class="testimonial-card__date">18 de mayo de 2026</p>
                 </div>
               </div>
               <p class="testimonial-card__quote">Las instrucciones de pago fueron claras y la revisión avanzó rápido.</p>
@@ -323,21 +463,21 @@
 
             <article class="testimonial-card reveal">
               <div class="testimonial-card__header">
-                <span class="testimonial-card__avatar testimonial-card__avatar--olive" aria-hidden="true">CD</span>
+                <img class="testimonial-card__avatar" src="images/applicant-avatars/profile.svg" alt="" width="42" height="42" loading="lazy" decoding="async" />
                 <div class="testimonial-card__meta">
-                  <p class="testimonial-card__name">Chris D.</p>
-                  <p class="testimonial-card__date">8 de junio de 2025</p>
+                  <p class="testimonial-card__name">Ashley J.</p>
+                  <p class="testimonial-card__date">8 de junio de 2026</p>
                 </div>
               </div>
               <p class="testimonial-card__quote">Buena comunicación en todo momento. Me mantuvieron informado después de enviar.</p>
             </article>
 
-            <article class="testimonial-card reveal">
+            <article class="testimonial-card testimonial-card--extra" hidden>
               <div class="testimonial-card__header">
-                <span class="testimonial-card__avatar testimonial-card__avatar--brown" aria-hidden="true">JH</span>
+                <img class="testimonial-card__avatar" src="images/applicant-avatars/profile.svg" alt="" width="42" height="42" loading="lazy" decoding="async" />
                 <div class="testimonial-card__meta">
-                  <p class="testimonial-card__name">Jordan H.</p>
-                  <p class="testimonial-card__date">25 de julio de 2025</p>
+                  <p class="testimonial-card__name">Mellanie B.</p>
+                  <p class="testimonial-card__date">25 de julio de 2026</p>
                 </div>
               </div>
               <p class="testimonial-card__quote">Profesional de principio a fin. El proceso se sintió bien organizado.</p>
@@ -345,10 +485,10 @@
 
             <article class="testimonial-card testimonial-card--extra" hidden>
               <div class="testimonial-card__header">
-                <span class="testimonial-card__avatar testimonial-card__avatar--slate" aria-hidden="true">AP</span>
+                <img class="testimonial-card__avatar" src="images/applicant-avatars/profile.svg" alt="" width="42" height="42" loading="lazy" decoding="async" />
                 <div class="testimonial-card__meta">
-                  <p class="testimonial-card__name">Alicia P.</p>
-                  <p class="testimonial-card__date">11 de agosto de 2025</p>
+                  <p class="testimonial-card__name">Jay G.</p>
+                  <p class="testimonial-card__date">11 de agosto de 2026</p>
                 </div>
               </div>
               <p class="testimonial-card__quote">Aprecié lo claros que fueron los siguientes pasos después de enviar. Todo se sintió intencional.</p>
@@ -356,47 +496,15 @@
 
             <article class="testimonial-card testimonial-card--extra" hidden>
               <div class="testimonial-card__header">
-                <span class="testimonial-card__avatar testimonial-card__avatar--navy" aria-hidden="true">DW</span>
+                <img class="testimonial-card__avatar" src="images/applicant-avatars/profile.svg" alt="" width="42" height="42" loading="lazy" decoding="async" />
                 <div class="testimonial-card__meta">
-                  <p class="testimonial-card__name">David W.</p>
-                  <p class="testimonial-card__date">3 de septiembre de 2025</p>
+                  <p class="testimonial-card__name">Delilah E.</p>
+                  <p class="testimonial-card__date">3 de septiembre de 2026</p>
                 </div>
               </div>
               <p class="testimonial-card__quote">Respondieron mis preguntas con rapidez y el formulario de solicitud fue fácil de completar.</p>
             </article>
 
-            <article class="testimonial-card testimonial-card--extra" hidden>
-              <div class="testimonial-card__header">
-                <span class="testimonial-card__avatar testimonial-card__avatar--steel" aria-hidden="true">SN</span>
-                <div class="testimonial-card__meta">
-                  <p class="testimonial-card__name">Sara N.</p>
-                  <p class="testimonial-card__date">19 de octubre de 2025</p>
-                </div>
-              </div>
-              <p class="testimonial-card__quote">El equipo respetó mi tiempo y explicó los plazos sin presión.</p>
-            </article>
-
-            <article class="testimonial-card testimonial-card--extra" hidden>
-              <div class="testimonial-card__header">
-                <span class="testimonial-card__avatar testimonial-card__avatar--ink" aria-hidden="true">MB</span>
-                <div class="testimonial-card__meta">
-                  <p class="testimonial-card__name">Marcus B.</p>
-                  <p class="testimonial-card__date">7 de noviembre de 2025</p>
-                </div>
-              </div>
-              <p class="testimonial-card__quote">Los detalles de pago por Chime fueron fáciles de seguir y la confirmación se gestionó con prontitud.</p>
-            </article>
-
-            <article class="testimonial-card testimonial-card--extra" hidden>
-              <div class="testimonial-card__header">
-                <span class="testimonial-card__avatar testimonial-card__avatar--mist" aria-hidden="true">EL</span>
-                <div class="testimonial-card__meta">
-                  <p class="testimonial-card__name">Elena R.</p>
-                  <p class="testimonial-card__date">14 de diciembre de 2025</p>
-                </div>
-              </div>
-              <p class="testimonial-card__quote">Se sintió como un proceso de administración real: organizado, transparente y fácil de confiar.</p>
-            </article>
           </div>
 
           <div class="testimonials-more-wrap">
@@ -431,6 +539,18 @@
               <p id="feedbackStatus" class="feedback-status" role="status" aria-live="polite"></p>
             </form>
           </div>
+
+          <section id="team" class="section team-photo-strip" aria-label="Fotos del equipo de Alderive Properties">
+            <div class="container">
+              <figure class="why-work__media">
+                <div class="community-slider why-work__slider" aria-label="Fotos del equipo de Alderive Properties">
+                  <img class="slide active" src="./images/community-erpac-team.jpg" alt="Equipo de Alderive Properties en una reunión de ERPAC" width="1400" height="1400" loading="lazy" decoding="async" />
+                  <img class="slide" src="./images/community-team.jpg" alt="Equipo de Alderive Properties colaborando juntos" width="1200" height="900" loading="lazy" decoding="async" />
+                  <img class="slide" src="./images/community-advocates.jpg" alt="Equipo de Alderive Properties en un evento de apoyo comunitario" width="1200" height="900" loading="lazy" decoding="async" />
+                </div>
+              </figure>
+            </div>
+          </section>
         </div>
       </section>
     </main>
@@ -439,18 +559,18 @@
       <div class="container footer__grid">
         <div class="footer__brand">
           <div class="brand brand--footer">
-            <img class="brand__logo" src="./images/private-property-logo.svg" alt="Logotipo de Administración Privada de Propiedades" />
+            <img class="brand__logo" src="./images/private-property-logo-dark.svg" data-logo-light="./images/private-property-logo.svg" data-logo-dark="./images/private-property-logo-dark.svg" alt="Logotipo de Alderive Properties" />
           </div>
           <div class="footer__contact" id="contact" aria-label="Teléfono de contacto">
             <span>Contacto</span>
-            <a class="footer__phone" href="tel:+18142547767">+1 814-254-7767</a>
-            <a class="footer__email" href="mailto:infoprivateproperty.holdings@gmail.com">infoprivateproperty.holdings@gmail.com</a>
+            <a class="footer__phone" href="tel:+18142547767"><svg class="footer__contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.96.36 1.9.7 2.8a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.84.58 2.8.7A2 2 0 0 1 22 16.92Z"/></svg>+1 814-254-7767</a>
+            <a class="footer__email" href="mailto:infoprivateproperty.holdings@gmail.com"><svg class="footer__contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>infoprivateproperty.holdings@gmail.com</a>
           </div>
         </div>
       </div>
 
       <div class="container footer__bottom">
-        <p>© 2026 Administración Privada de Propiedades. Alquileres administrados de forma privada.</p>
+        <p>© 2026 Alderive Properties. Alquileres administrados de forma privada.</p>
         <p class="footer__legal">Privacidad • Términos</p>
       </div>
     </footer>
@@ -458,44 +578,6 @@
     <script>
       localStorage.setItem('lang', 'es');
       localStorage.setItem('siteLanguage', 'es');
-
-      function toggleMenu() {
-        var nav = document.getElementById('nav');
-        var btn = document.getElementById('nav-toggle');
-        nav.classList.toggle('active');
-        if (btn) {
-          btn.setAttribute('aria-expanded', nav.classList.contains('active'));
-        }
-      }
-
-      function closeMenu() {
-        var nav = document.getElementById('nav');
-        var btn = document.getElementById('nav-toggle');
-        if (!nav) return;
-        nav.classList.remove('active');
-        nav.classList.remove('open');
-        if (btn) btn.setAttribute('aria-expanded', 'false');
-      }
-
-      document.querySelectorAll('#nav a').forEach(function (link) {
-        link.addEventListener('click', function () {
-          closeMenu();
-        });
-      });
-
-      document.addEventListener('click', function (event) {
-        var nav = document.querySelector('.nav');
-        var hamburger = document.querySelector('.hamburger');
-        var isMobile = window.matchMedia('(max-width: 768px)').matches;
-        if (!isMobile || !nav || !hamburger || !nav.classList.contains('active')) return;
-
-        var isClickInsideNav = nav.contains(event.target);
-        var isClickOnHamburger = hamburger.contains(event.target);
-
-        if (!isClickInsideNav && !isClickOnHamburger) {
-          closeMenu();
-        }
-      });
 
       (function () {
         const slides = document.querySelectorAll('.community-slider .slide');
@@ -528,6 +610,6 @@
         });
       })();
     </script>
-    <script src="./script.js"></script>
+    <script src="./script.js?v=language-control-21"></script>
   </body>
 </html>

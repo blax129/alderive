@@ -1,13 +1,17 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <title>Payment Review | Alderive Properties</title>
+    <script>try { document.documentElement.dataset.theme = localStorage.getItem('alderive-theme') === 'light' ? 'light' : 'dark'; } catch (_) { document.documentElement.dataset.theme = 'dark'; }</script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <script src="./page-loader.js?v=5"></script>
     <meta name="robots" content="noindex, nofollow" />
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="./style.css?v=shared-pages-28" />
     <style>
       * { box-sizing: border-box; }
       html {
@@ -109,16 +113,29 @@
         .actions button { width: 100%; flex: none; }
       }
     </style>
+      <link rel="stylesheet" href="./site-theme.css?v=1" />
   </head>
-  <body>
+  <body data-en-title="Payment review | Alderive Properties" data-es-title="Revisión de pagos | Alderive Properties" class="site-page"><header class="header"><div class="container header__inner"><a class="back-btn" href="./index.html" data-en="← Back" data-es="← Volver">← Back</a><button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to light mode" aria-pressed="false">
+          <span class="theme-toggle__glyph" aria-hidden="true">
+            <svg class="theme-icon theme-icon--sun" viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="12" cy="12" r="4.25"></circle>
+              <g stroke-linecap="round">
+                <path d="M12 1.75v2.5M12 19.75v2.5M4.93 4.93l1.77 1.77M17.3 17.3l1.77 1.77M1.75 12h2.5M19.75 12h2.5M4.93 19.07l1.77-1.77M17.3 6.7l1.77-1.77"></path>
+              </g>
+            </svg>
+            <svg class="theme-icon theme-icon--moon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M18.5 14.5A7.5 7.5 0 0 1 9.5 5.5a7.5 7.5 0 1 0 9 9Z"></path>
+            </svg>
+          </span>
+        </button></div></header>
     <main class="wrap">
-      <h1>Payment review</h1>
-      <p class="sub">Pending submissions appear first. Type the amount that actually arrived, then confirm. That amount is what prints on the receipt.</p>
+      <h1 data-en="Payment review" data-es="Revisión de pagos">Payment review</h1>
+      <p class="sub" data-en="Pending submissions appear first. Type the amount that actually arrived, then confirm. That amount is what prints on the receipt." data-es="Los comprobantes pendientes aparecen primero. Escriba el importe recibido y confirme. Ese importe se imprimirá en el recibo.">Pending submissions appear first. Type the amount that actually arrived, then confirm. That amount is what prints on the receipt.</p>
 
       <form class="login" id="loginForm">
-        <label for="password">Owner password</label>
+        <label for="password" data-en="Owner password" data-es="Contraseña del propietario">Owner password</label>
         <input id="password" name="password" type="password" autocomplete="current-password" required />
-        <button class="primary" type="submit">Open queue</button>
+        <button class="primary" type="submit" data-en="Open queue" data-es="Ver comprobantes">Open queue</button>
         <p class="error" id="loginError"></p>
       </form>
 
@@ -131,6 +148,8 @@
     <script src="./script.js"></script>
     <script>
       (function () {
+        const copy = {"Applicant": "Solicitante", "Application ID: ": "ID de solicitud: ", "\nReceipt: ": "\nRecibo: ", "\nExpected fee: ": "\nCargo esperado: ", "\nAmount received: ": "\nImporte recibido: ", "Payment screenshot": "Captura del pago", "Amount received": "Importe recibido", "Enter what actually arrived (can be more than $70). This amount prints on the receipt.": "Ingrese el importe recibido (puede superar los $70). Este importe se imprime en el recibo.", "Confirm payment": "Confirmar pago", "Enter the amount you received before confirming.": "Ingrese el importe recibido antes de confirmar.", "Payment was confirmed, but the applicant email failed. You can send the receipt link manually.": "El pago se confirmó, pero no se pudo enviar el correo al solicitante. Puede enviar el enlace al recibo manualmente.", "Confirm failed": "No se pudo confirmar", "Reject proof": "Rechazar comprobante", "Reject failed": "No se pudo rechazar", "Could not open the queue": "No se pudieron cargar los comprobantes", "<p class=\"meta\">No payment proofs yet.</p>": "<p class=\"meta\">Todavía no hay comprobantes de pago.</p>", "pending": "pendiente", "paid": "pagado", "rejected": "rechazado"};
+        const t = text => localStorage.getItem("lang") === "es" ? (copy[text] || text) : text;
         const loginForm = document.getElementById('loginForm');
         const passwordInput = document.getElementById('password');
         const loginError = document.getElementById('loginError');
@@ -149,7 +168,7 @@
           const rows = await window.ownerListProofs(password);
           list.innerHTML = '';
           if (!rows || !rows.length) {
-            list.innerHTML = '<p class="meta">No payment proofs yet.</p>';
+            list.innerHTML = t("<p class=\"meta\">No payment proofs yet.</p>");
             return;
           }
           rows.forEach(function (row) {
@@ -157,16 +176,16 @@
             card.className = 'card';
             const canAct = row.status === 'pending';
             const heading = document.createElement('h2');
-            heading.textContent = (row.applicant_name || 'Applicant') + ' · ' + (row.status || '');
+            heading.textContent = (row.applicant_name || t("Applicant")) + ' · ' + t(row.status || '');
             const property = document.createElement('p');
             property.className = 'meta';
             property.textContent = row.property_address || '';
             const meta = document.createElement('p');
             meta.className = 'meta';
-            meta.textContent = 'Application ID: ' + (row.application_id || '') +
-              '\nReceipt: ' + (row.receipt_number || '') +
-              '\nExpected fee: ' + money(row.application_fee) +
-              (row.confirmed_amount != null ? '\nAmount received: ' + money(row.confirmed_amount) : '');
+            meta.textContent = t("Application ID: ") + (row.application_id || '') +
+              t("\nReceipt: ") + (row.receipt_number || '') +
+              t("\nExpected fee: ") + money(row.application_fee) +
+              (row.confirmed_amount != null ? t("\nAmount received: ") + money(row.confirmed_amount) : '');
             meta.style.whiteSpace = 'pre-line';
             card.appendChild(heading);
             card.appendChild(property);
@@ -178,7 +197,7 @@
               shotLink.rel = 'noreferrer';
               const img = document.createElement('img');
               img.className = 'shot';
-              img.alt = 'Payment screenshot';
+              img.alt = t("Payment screenshot");
               img.src = row.screenshot_url;
               shotLink.appendChild(img);
               card.appendChild(shotLink);
@@ -190,7 +209,7 @@
               const amountWrap = document.createElement('div');
               amountWrap.className = 'amount-field';
               const amountLabel = document.createElement('label');
-              amountLabel.textContent = 'Amount received';
+              amountLabel.textContent = t("Amount received");
               const amountInput = document.createElement('input');
               amountInput.type = 'number';
               amountInput.inputMode = 'decimal';
@@ -200,7 +219,7 @@
               amountInput.value = row.application_fee != null ? String(Number(row.application_fee)) : '70';
               const amountHint = document.createElement('p');
               amountHint.className = 'hint';
-              amountHint.textContent = 'Enter what actually arrived (can be more than $70). This amount prints on the receipt.';
+              amountHint.textContent = t("Enter what actually arrived (can be more than $70). This amount prints on the receipt.");
               amountWrap.appendChild(amountLabel);
               amountWrap.appendChild(amountInput);
               amountWrap.appendChild(amountHint);
@@ -209,11 +228,11 @@
               const confirmBtn = document.createElement('button');
               confirmBtn.className = 'confirm';
               confirmBtn.type = 'button';
-              confirmBtn.textContent = 'Confirm payment';
+              confirmBtn.textContent = t("Confirm payment");
               confirmBtn.addEventListener('click', async function () {
                 const amount = Number(amountInput.value);
                 if (!Number.isFinite(amount) || amount <= 0) {
-                  queueError.textContent = 'Enter the amount you received before confirming.';
+                  queueError.textContent = t("Enter the amount you received before confirming.");
                   amountInput.focus();
                   return;
                 }
@@ -221,18 +240,20 @@
                 rejectBtn.disabled = true;
                 try {
                   const result = await window.ownerConfirmProof(password, row.receipt_number, amount);
+                  let emailWarning = '';
                   if (!result || !result.replay) {
                     try {
                       row.confirmed_amount = amount;
                       await window.sendPaidReceiptEmail(row);
                     } catch (emailError) {
                       console.error('[Admin] Paid receipt email failed', emailError);
-                      queueError.textContent = 'Payment was confirmed, but the applicant email failed. You can send the receipt link manually.';
+                      emailWarning = t("Payment was confirmed, but the applicant email failed. You can send the receipt link manually.");
                     }
                   }
                   await loadQueue(password);
+                  if (emailWarning) queueError.textContent = emailWarning;
                 } catch (error) {
-                  queueError.textContent = error.message || 'Confirm failed';
+                  queueError.textContent = error.message || t("Confirm failed");
                   confirmBtn.disabled = false;
                   rejectBtn.disabled = false;
                 }
@@ -240,7 +261,7 @@
               const rejectBtn = document.createElement('button');
               rejectBtn.className = 'reject';
               rejectBtn.type = 'button';
-              rejectBtn.textContent = 'Reject proof';
+              rejectBtn.textContent = t("Reject proof");
               rejectBtn.addEventListener('click', async function () {
                 confirmBtn.disabled = true;
                 rejectBtn.disabled = true;
@@ -248,7 +269,7 @@
                   await window.ownerRejectProof(password, row.receipt_number);
                   await loadQueue(password);
                 } catch (error) {
-                  queueError.textContent = error.message || 'Reject failed';
+                  queueError.textContent = error.message || t("Reject failed");
                   confirmBtn.disabled = false;
                   rejectBtn.disabled = false;
                 }
@@ -270,7 +291,7 @@
             loginForm.classList.add('hidden');
             queue.classList.remove('hidden');
           } catch (error) {
-            loginError.textContent = error.message || 'Could not open the queue';
+            loginError.textContent = error.message || t("Could not open the queue");
           }
         });
 

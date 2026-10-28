@@ -1,8 +1,11 @@
 <!doctype html>
 <html lang="es">
   <head>
+<script>try { document.documentElement.dataset.theme = localStorage.getItem('alderive-theme') === 'light' ? 'light' : 'dark'; } catch (_) { document.documentElement.dataset.theme = 'dark'; }</script>
+<link rel="stylesheet" href="./style.css?v=shared-pages-28"><link rel="stylesheet" href="./site-theme.css?v=1">
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="./page-loader.js?v=5"></script>
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="icon" href="/images/favicon-32.png" type="image/png" sizes="32x32" />
     <link rel="apple-touch-icon" href="/images/apple-touch-icon.png" />
@@ -11,14 +14,14 @@
     <meta property="og:image" content="/images/og-image.png" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:image" content="/images/og-image.png" />
-    <title>Redirigiendo | Administración Privada de Propiedades</title>
+    <title>Redirigiendo | Alderive Properties</title>
     <script>
-      localStorage.setItem("lang", "es");
-      localStorage.setItem("siteLanguage", "es");
-      window.location.replace("application-received.html" + window.location.search + window.location.hash);
+      try { localStorage.setItem("lang", "es");
+      localStorage.setItem("siteLanguage", "es"); } catch (_) {}
+      window.location.replace("application-received.html" + (window.location.search ? window.location.search + "&lang=es" : "?lang=es") + window.location.hash);
     </script>
   </head>
-  <body>
+  <body class="site-page">
     <main style="min-height: 100vh; display: grid; place-items: center; font-family: system-ui, sans-serif;">
       <h1 style="font-size: 1rem; font-weight: 500;">Redirigiendo a la confirmación...</h1>
     </main>

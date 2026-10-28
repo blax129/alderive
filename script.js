@@ -1,9 +1,47 @@
 (() => {
   const STORAGE_KEY = "lang";
   const FALLBACK_STORAGE_KEY = "siteLanguage";
+  const THEME_STORAGE_KEY = "alderive-theme";
   const LANGS = ["en", "es"];
 
+  function updateThemeControl(theme) {
+    const button = document.getElementById("theme-toggle");
+    if (!button) return;
+
+    const isSpanish = document.documentElement.lang === "es";
+    const isLight = theme === "light";
+    button.setAttribute("aria-pressed", String(isLight));
+    button.setAttribute("aria-label", isSpanish
+      ? `Cambiar a modo ${isLight ? "oscuro" : "claro"}`
+      : `Switch to ${isLight ? "dark" : "light"} mode`);
+  }
+
+  function applyTheme(theme) {
+    const selectedTheme = theme === "light" ? "light" : "dark";
+    document.documentElement.dataset.theme = selectedTheme;
+    localStorage.setItem(THEME_STORAGE_KEY, selectedTheme);
+
+    document.querySelectorAll("[data-logo-light][data-logo-dark]").forEach((logo) => {
+      logo.src = selectedTheme === "light" ? logo.dataset.logoLight : logo.dataset.logoDark;
+    });
+    updateThemeControl(selectedTheme);
+  }
+
+  function setupThemeToggle() {
+    const button = document.getElementById("theme-toggle");
+    if (!button) return;
+
+    applyTheme(localStorage.getItem(THEME_STORAGE_KEY) || "dark");
+    button.addEventListener("click", () => {
+      applyTheme(document.documentElement.dataset.theme === "light" ? "dark" : "light");
+    });
+  }
+
   function getInitialLang() {
+    // Home pages contain fully localized cards as well as translated attributes.
+    if (document.querySelector('.persistent-language')) return document.documentElement.lang;
+    const requested = new URLSearchParams(location.search).get("lang");
+    if (LANGS.includes(requested)) return requested;
     const saved = localStorage.getItem(STORAGE_KEY) || localStorage.getItem(FALLBACK_STORAGE_KEY);
     if (LANGS.includes(saved)) return saved;
     return "en";
@@ -171,6 +209,7 @@
     localStorage.setItem(STORAGE_KEY, selectedLang);
     localStorage.setItem(FALLBACK_STORAGE_KEY, selectedLang);
     updateSwitcher(selectedLang);
+    updateThemeControl(document.documentElement.dataset.theme || "dark");
     updateOpenFaqHeights();
 
     window.setTimeout(() => {
@@ -199,6 +238,7 @@
     });
 
     applyLanguage(initialLang);
+    setupThemeToggle();
     setupFaqAccordion();
     setupFeedbackForm();
     setupRevealAnimations();
@@ -256,7 +296,7 @@ window.receiptsRequest = async function receiptsRequest(action, fields) {
   try {
     data = text ? JSON.parse(text) : null;
   } catch (error) {
-    data = null;
+    throw new Error(document.documentElement.lang === "es" ? "El servicio de recibos no está disponible. Inténtelo de nuevo." : "Receipt service returned an invalid response. Please try again.");
   }
 
   if (!response.ok) {
@@ -363,3 +403,257 @@ window.getChimePaymentEmail = function getChimePaymentEmail(applicationId) {
   }
   return emails[hash % emails.length];
 };
+
+
+// A short property showcase: neighborhood, living room, dining space, bedroom.
+(() => {
+  const videos = [...document.querySelectorAll('.portfolio-hero__video')];
+  if (!videos.length) return;
+  const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const connection = navigator.connection;
+  const failed = new Set();
+  let visible = true;
+  let active = 0;
+  let pending = false;
+  let generation = 0;
+  const allowed = () => visible && !document.hidden && !reduced.matches && !connection?.saveData;
+  function load(index) {
+    const video = videos[index];
+    if (!video.getAttribute('src')) {
+      video.preload = 'auto';
+      video.src = video.dataset.src;
+      video.muted = true;
+      video.load();
+    }
+    return video;
+  }
+  function nextIndex() {
+    for (let step = 1; step <= videos.length; step++) {
+      const index = (active + step) % videos.length;
+      if (!failed.has(index)) return index;
+    }
+    return null;
+  }
+  async function show(index, restart = false) {
+    if (pending || !allowed() || index === null) return;
+    pending = true;
+    const token = ++generation;
+    const video = load(index);
+    if (restart) video.currentTime = 0;
+    try {
+      await video.play();
+      if (token !== generation || !allowed()) { video.pause(); return; }
+      active = index;
+      videos.forEach((item, i) => {
+        item.classList.toggle('is-playing', i === active);
+        // Keep the outgoing frame underneath the dissolve.
+        if (i !== active) item.pause();
+      });
+      const next = nextIndex();
+      if (next !== null && next !== active) load(next);
+    } catch (_) {
+      // A blocked autoplay retains the poster; a bad asset is skipped.
+      if (video.error) failed.add(index);
+    } finally {
+      if (token === generation) pending = false;
+    }
+    if (failed.has(index) && allowed()) show(nextIndex(), true);
+  }
+  function sync() {
+    if (!allowed()) {
+      generation++;
+      pending = false;
+      videos.forEach(video => {
+        video.pause();
+        if (reduced.matches || connection?.saveData) video.classList.remove('is-playing');
+      });
+    } else show(failed.has(active) ? nextIndex() : active);
+  }
+  videos.forEach((video, index) => {
+    const advance = () => {
+      if (index === active && !pending && allowed()) show(nextIndex(), true);
+    };
+    video.addEventListener('timeupdate', () => {
+      if (video.currentTime >= 6) advance();
+    });
+    video.addEventListener('ended', advance);
+    video.addEventListener('error', () => {
+      failed.add(index);
+      if (index === active) advance();
+    });
+  });
+  reduced.addEventListener('change', sync);
+  connection?.addEventListener?.('change', sync);
+  document.addEventListener('visibilitychange', sync);
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(([entry]) => {
+      visible = entry.isIntersecting;
+      sync();
+    }).observe(videos[0].closest('.portfolio-hero'));
+  } else sync();
+})();
+
+
+// Calm slideshow pacing, paused offscreen and for reduced-motion preferences.
+(() => {
+  const gallery = document.querySelector('.team-photo-strip .community-slider');
+  if (!gallery) return;
+  const slides = [...gallery.querySelectorAll('.slide')];
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+  let current = 0;
+  let visible = false;
+  let timer;
+  function sync() {
+    clearInterval(timer);
+    if (!visible || document.hidden || reduced.matches || slides.length < 2) return;
+    timer = setInterval(() => {
+      const next = (current + 1) % slides.length;
+      if (!slides[next].complete || !slides[next].naturalWidth) return;
+      slides[current].classList.remove('active');
+      slides[next].classList.add('active');
+      current = next;
+    }, 5500);
+  }
+  reduced.addEventListener('change', sync);
+  document.addEventListener('visibilitychange', sync);
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(([entry]) => {
+      visible = entry.isIntersecting;
+      sync();
+    }).observe(gallery);
+  } else { visible = true; sync(); }
+})();
+
+// Native scrolling keeps the benefits easy to swipe, scroll, or browse by button.
+document.querySelectorAll('.why-work__list, .services-grid').forEach((list, listIndex) => {
+  const cards = [...list.children];
+  const spanish = document.documentElement.lang === 'es';
+  const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+  list.classList.add('benefit-scroller');
+  list.id = `feature-scroller-${listIndex + 1}`;
+  list.tabIndex = 0;
+  const heading = list.closest('section').querySelector('h2');
+  list.setAttribute('aria-label', heading?.textContent.trim() || (spanish ? 'Diapositivas' : 'Slides'));
+  cards.forEach(card => card.classList.remove('reveal'));
+  const controls = document.createElement('div');
+  controls.className = 'benefit-navigation';
+  const button = (text, label) => {
+    const item = document.createElement('button');
+    item.type = 'button';
+    item.textContent = text;
+    item.setAttribute('aria-label', label);
+    item.setAttribute('aria-controls', list.id);
+    return item;
+  };
+  const previous = button('←', spanish ? 'Anterior' : 'Previous card');
+  const next = button('→', spanish ? 'Siguiente' : 'Next card');
+  const dots = document.createElement('div');
+  dots.className = 'benefit-navigation__dots';
+  const markers = cards.map((card, index) => {
+    const dot = button('', `${spanish ? 'Mostrar' : 'Show'}: ${card.querySelector('h3, .faq-item__question').textContent.trim()}`);
+    dot.addEventListener('click', () => go(index));
+    dots.append(dot);
+    return dot;
+  });
+  controls.append(previous, dots, next);
+  list.after(controls);
+  let active = 0;
+  const position = card => card.getBoundingClientRect().left - list.getBoundingClientRect().left + list.scrollLeft;
+  function go(index) {
+    list.scrollTo({ left: position(cards[Math.max(0, Math.min(cards.length - 1, index))]), behavior: reduced.matches ? 'instant' : 'smooth' });
+  }
+  function sync() {
+    active = cards.reduce((best, card, index) => Math.abs(position(card) - list.scrollLeft) < Math.abs(position(cards[best]) - list.scrollLeft) ? index : best, 0);
+    markers.forEach((dot, index) => dot.setAttribute('aria-current', String(index === active)));
+    previous.disabled = list.scrollLeft <= 2;
+    next.disabled = list.scrollLeft >= list.scrollWidth - list.clientWidth - 2;
+  }
+  previous.addEventListener('click', () => go(active - 1));
+  next.addEventListener('click', () => go(active + 1));
+  list.addEventListener('keydown', event => {
+    if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
+    event.preventDefault();
+    go(active + (event.key === 'ArrowRight' ? 1 : -1));
+  });
+  list.addEventListener('scroll', sync, { passive: true });
+  new ResizeObserver(sync).observe(list);
+  sync();
+});
+
+// Shared expand/collapse actions are intentionally hidden to match the simplified interaction pattern.
+document.addEventListener('DOMContentLoaded', () => {
+  if (!document.querySelector('.portfolio-hero')) return;
+});
+
+// Use the complete localized homepage and retain the visitor's section.
+document.querySelectorAll('[data-page-language]').forEach(link => {
+  link.addEventListener('click', () => {
+    const lang = link.dataset.pageLanguage;
+    try {
+      localStorage.setItem('lang', lang);
+      localStorage.setItem('siteLanguage', lang);
+    } catch (_) {}
+    link.hash = window.location.hash;
+  });
+});
+
+// Dismiss compact section navigation after choosing a destination or pressing Escape.
+document.querySelectorAll('.section-menu').forEach(menu => {
+  menu.querySelectorAll('a').forEach(link => link.addEventListener('click', () => { menu.open = false; }));
+  document.addEventListener('click', event => { if (!menu.contains(event.target)) menu.open = false; });
+  menu.addEventListener('keydown', event => {
+    if (event.key === 'Escape') { menu.open = false; menu.querySelector('summary').focus(); }
+  });
+});
+
+// Keep section travel brief and consistent, even for distant destinations.
+(() => {
+  let frame;
+  let cancelTravel = () => {};
+  document.querySelectorAll('.section-menu__panel > a[href^="#"]').forEach(link => {
+    link.addEventListener('click', event => {
+      if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+      const target = document.getElementById(link.hash.slice(1));
+      if (!target) return;
+      event.preventDefault();
+      cancelTravel();
+      history.pushState(null, '', link.hash);
+      const start = window.scrollY;
+      const destination = Math.max(0, Math.min(
+        start + target.getBoundingClientRect().top - 24,
+        document.documentElement.scrollHeight - window.innerHeight
+      ));
+      const finish = () => {
+        const hadTabindex = target.hasAttribute('tabindex');
+        if (!hadTabindex) target.setAttribute('tabindex', '-1');
+        target.focus({ preventScroll: true });
+        if (!hadTabindex) target.addEventListener('blur', () => target.removeAttribute('tabindex'), { once: true });
+      };
+      if (matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        window.scrollTo({ top: destination, behavior: 'instant' });
+        finish();
+        return;
+      }
+      const began = performance.now();
+      const duration = 520;
+      const cancel = () => {
+        cancelAnimationFrame(frame);
+        window.removeEventListener('wheel', cancel);
+        window.removeEventListener('touchstart', cancel);
+        window.removeEventListener('keydown', cancel);
+      };
+      cancelTravel = cancel;
+      window.addEventListener('wheel', cancel, { passive: true });
+      window.addEventListener('touchstart', cancel, { passive: true });
+      window.addEventListener('keydown', cancel);
+      const step = now => {
+        const progress = Math.min(1, (now - began) / duration);
+        const eased = 1 - Math.pow(1 - progress, 3);
+        window.scrollTo({ top: start + (destination - start) * eased, behavior: 'instant' });
+        if (progress < 1) frame = requestAnimationFrame(step);
+        else { cancel(); finish(); }
+      };
+      frame = requestAnimationFrame(step);
+    });
+  });
+})();

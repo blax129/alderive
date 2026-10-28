@@ -1,58 +1,14 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-labelledby="ogTitle">
-  <title id="ogTitle">Private Property Holdings</title>
-  <defs>
-    <linearGradient id="pageBg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#0A1628"/>
-      <stop offset="45%" stop-color="#0A1410"/>
-      <stop offset="100%" stop-color="#102033"/>
-    </linearGradient>
-    <radialGradient id="glow" cx="18%" cy="12%" r="55%">
-      <stop offset="0%" stop-color="#0A1628" stop-opacity="0.28"/>
-      <stop offset="100%" stop-color="#0A1628" stop-opacity="0"/>
-    </radialGradient>
-    <radialGradient id="glow2" cx="88%" cy="82%" r="45%">
-      <stop offset="0%" stop-color="#DCE3EA" stop-opacity="0.16"/>
-      <stop offset="100%" stop-color="#DCE3EA" stop-opacity="0"/>
-    </radialGradient>
-    <linearGradient id="greenBright" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#DCE3EA"/>
-      <stop offset="50%" stop-color="#0A1628"/>
-      <stop offset="100%" stop-color="#0A1628"/>
-    </linearGradient>
-    <linearGradient id="towerFill" x1="50%" y1="0%" x2="50%" y2="100%">
-      <stop offset="0%" stop-color="#F7FBF8"/>
-      <stop offset="100%" stop-color="#B7E4C7"/>
-    </linearGradient>
-    <linearGradient id="arcGlow" x1="0%" y1="100%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#0A1628"/>
-      <stop offset="55%" stop-color="#DCE3EA"/>
-      <stop offset="100%" stop-color="#DCE3EA"/>
-    </linearGradient>
-    <linearGradient id="greenDeep" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#DCE3EA"/>
-      <stop offset="100%" stop-color="#0A1628"/>
-    </linearGradient>
-  </defs>
-  <rect width="1200" height="630" fill="url(#pageBg)"/>
-  <rect width="1200" height="630" fill="url(#glow)"/>
-  <rect width="1200" height="630" fill="url(#glow2)"/>
-
-  <g transform="translate(600 188)">
-    <path d="M-150 56 C-118 -74, 118 -74, 150 56" fill="none" stroke="url(#arcGlow)" stroke-width="16" stroke-linecap="round"/>
-    <rect x="-118" y="-10" width="44" height="72" rx="3" fill="none" stroke="url(#greenBright)" stroke-width="4"/>
-    <path d="M-24 -68 L24 -68 L38 44 L-38 44 Z" fill="url(#towerFill)"/>
-    <rect x="74" y="-30" width="52" height="92" rx="3" fill="none" stroke="url(#greenBright)" stroke-width="4"/>
-    <line x1="88" y1="-14" x2="88" y2="54" stroke="#DCE3EA" stroke-width="3"/>
-    <line x1="102" y1="-14" x2="102" y2="54" stroke="#DCE3EA" stroke-width="3"/>
-    <line x1="116" y1="-14" x2="116" y2="54" stroke="#DCE3EA" stroke-width="3"/>
-    <path d="M-44 44 L0 10 L44 44 V68 H-44 Z" fill="url(#greenDeep)"/>
-    <rect x="-14" y="30" width="28" height="22" rx="2" fill="#D8F3DC"/>
-    <path d="M0 -78 L4 -70 L12 -70 L5 -64 L8 -56 L0 -62 L-8 -56 L-5 -64 L-12 -70 L-4 -70 Z" fill="#D8F3DC"/>
+  <title id="ogTitle">Alderive Properties</title>
+  <rect width="1200" height="630" fill="#142F2A"/>
+  <path d="M90 630V430c0-166 137-300 306-300h328c169 0 306 134 306 300v200" fill="none" stroke="#83C7A5" stroke-opacity="0.08" stroke-width="3"/>
+  <g transform="translate(510 94) scale(1.2)" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M18 126 68 20l56 106" stroke="#83C7A5" stroke-width="12"/>
+    <path d="M43 82h50M68 82v44" stroke="#C97852" stroke-width="10"/>
+    <path d="M50 126h36" stroke="#83C7A5" stroke-width="8"/>
+    <circle cx="68" cy="19" r="6" fill="#C97852" stroke="none"/>
   </g>
-
-  <text x="600" y="360" text-anchor="middle" fill="url(#greenBright)" font-family="'Playfair Display', Georgia, 'Times New Roman', serif" font-size="72" font-weight="700" letter-spacing="5">PRIVATE PROPERTY</text>
-  <line x1="300" y1="388" x2="470" y2="388" stroke="#0A1628" stroke-width="3" opacity="0.85"/>
-  <text x="600" y="430" text-anchor="middle" fill="#E8F5EE" font-family="Manrope, Arial, sans-serif" font-size="34" font-weight="700" letter-spacing="12">HOLDINGS</text>
-  <line x1="730" y1="388" x2="900" y2="388" stroke="#0A1628" stroke-width="3" opacity="0.85"/>
-  <text x="600" y="510" text-anchor="middle" fill="rgba(232,245,238,0.72)" font-family="Manrope, Arial, sans-serif" font-size="28" font-weight="500" letter-spacing="1.5">Professional rental coordination for privately managed properties</text>
+  <text x="600" y="370" text-anchor="middle" fill="#F5F2E8" font-family="'Playfair Display', Georgia, 'Times New Roman', serif" font-size="76" font-weight="700" letter-spacing="5">ALDERIVE</text>
+  <text x="600" y="425" text-anchor="middle" fill="#83C7A5" font-family="Manrope, Arial, sans-serif" font-size="28" font-weight="700" letter-spacing="12">PROPERTIES</text>
+  <text x="600" y="510" text-anchor="middle" fill="#F5F2E8" fill-opacity="0.78" font-family="Manrope, Arial, sans-serif" font-size="24" font-weight="500">Professional rental coordination for privately managed properties</text>
 </svg>

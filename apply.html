@@ -1,8 +1,10 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <script>try { document.documentElement.dataset.theme = localStorage.getItem('alderive-theme') === 'light' ? 'light' : 'dark'; } catch (_) { document.documentElement.dataset.theme = 'dark'; }</script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="./page-loader.js?v=5"></script>
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="icon" href="/images/favicon-32.png" type="image/png" sizes="32x32" />
     <link rel="apple-touch-icon" href="/images/apple-touch-icon.png" />
@@ -10,29 +12,34 @@
     <meta name="theme-color" content="#2F4A6D" />
     <meta
       name="description"
-      content="Private Property Holdings Rental Application — complete your premium rental application."
+      content="Alderive Properties Rental Application — complete your premium rental application."
     />
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="Private Property Holdings" />
-    <meta property="og:title" content="Rental Application | Private Property Holdings" />
-    <meta property="og:description" content="Complete your rental application with Private Property Holdings." />
+    <meta property="og:site_name" content="Alderive Properties" />
+    <meta property="og:title" content="Rental Application | Alderive Properties" />
+    <meta property="og:description" content="Complete your rental application with Alderive Properties." />
     <meta property="og:image" content="/images/og-image.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Private Property Holdings logo" />
+    <meta property="og:image:alt" content="Alderive Properties logo" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Rental Application | Private Property Holdings" />
-    <meta name="twitter:description" content="Complete your rental application with Private Property Holdings." />
+    <meta name="twitter:title" content="Rental Application | Alderive Properties" />
+    <meta name="twitter:description" content="Complete your rental application with Alderive Properties." />
     <meta name="twitter:image" content="/images/og-image.png" />
-    <meta name="twitter:image:alt" content="Private Property Holdings logo" />
-    <title>Rental Application | Private Property Holdings</title>
+    <meta name="twitter:image:alt" content="Alderive Properties logo" />
+    <title>Rental Application | Alderive Properties</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="./style.css" />
+    <script>
+      try {
+        document.documentElement.dataset.theme = localStorage.getItem("alderive-theme") === "light" ? "light" : "dark";
+      } catch {}
+    </script>
+    <link rel="stylesheet" href="./style.css?v=application-theme-23" />
     <style>
       .application-page {
         padding: 40px 20px;
@@ -627,15 +634,99 @@
           font-size: 13px;
         }
       }
+
+      /* Use the same theme palette and controls as the homepage. */
+      .rental-application { background: var(--bg); }
+      html[data-theme="dark"] .rental-application {
+        --panel: #142820;
+        --stroke: rgba(168,213,190,.22);
+        --stroke-2: rgba(168,213,190,.4);
+        --gold: #17483f;
+      }
+      html[data-theme="dark"] .rental-application .form-block { background: linear-gradient(135deg, #203d34, #142820); }
+      html[data-theme="dark"] .rental-application .field__input { background: #10251e; }
+      html[data-theme="dark"] .rental-application .btn--primary { background: #b8dcc6; color: #142820; border-color: #b8dcc6; }
+      .rental-application .header { background: var(--bg); }
+      .rental-application .brand__logo { width: clamp(180px, 28vw, 280px); }
+      .rental-application .application-form { background: var(--panel); border-color: var(--stroke); box-shadow: var(--shadow-2); border-radius: 22px; }
+      .rental-application .form-block { background: var(--panel); border-color: var(--stroke); }
+      .rental-application :is(.page-kicker,.form-block__title,.field__label,.required-mark,.payment-method-name,.back-btn) { color: var(--text); }
+      .rental-application :is(.progress-label,.field__hint) { color: var(--muted); }
+      .rental-application .field__input { color: var(--text); background: var(--panel); border-color: var(--stroke-2); }
+      .rental-application .field__input::placeholder { color: var(--muted); opacity: 1; }
+      .rental-application :is(.checkbox,.agreement-item,.payment-method-card) { color: var(--text); background: var(--panel); border-color: var(--stroke-2); }
+      .rental-application .progress-dot { color: var(--muted); background: var(--bg-2); border-color: var(--stroke-2); }
+      .rental-application .progress-step:not(:last-child)::after { background: var(--stroke-2); }
+      .rental-application .progress-step:is(.is-current,.is-complete)::after { background: var(--gold); }
+      .rental-application .progress-step:is(.is-current,.is-complete) .progress-dot { color: #fff; background: var(--gold); border-color: var(--gold); }
+      .rental-application .progress-step:is(.is-current,.is-complete) .progress-label { color: var(--text); }
+      .rental-application input:is([type="checkbox"],[type="radio"]) { accent-color: var(--gold); }
+      .rental-application .field__input option { background: var(--bg); color: var(--text); }
+      html[data-theme="light"] .rental-application { --panel: #fff; --panel-2: #e8ede6; }
+      html[data-theme="light"] .rental-application .form-block { background: #f8faf6; }
+      html[data-theme="light"] .rental-application .progress-step:is(.is-current,.is-complete) .progress-dot { color: #fff; }
+      html[data-theme="light"] .rental-application .progress-step.is-current .progress-dot { box-shadow: 0 0 0 6px rgba(23,72,63,.12); }
+      html[data-theme="light"] .rental-application :is(.checkbox,.agreement-item,.payment-method-card) { background: #e8ede6; border-color: #718579; }
+      html[data-theme="light"] .rental-application .payment-method-card--selected,
+      html[data-theme="light"] .rental-application .payment-method-option input:checked + .payment-method-card { background: #e3ece2; border-color: #17483f; box-shadow: 0 0 0 3px rgba(23,72,63,.12); }
+      html[data-theme="light"] .rental-application .required-mark { color: #a12c2c; }
+      html[data-theme="light"] .rental-application .back-btn { color: #17483f; }
+
+      /* Keep native select behavior with one consistently aligned chevron. */
+      .application-select { display: block; position: relative; width: 100%; min-width: 0; }
+      .application-select::after {
+        content: "";
+        position: absolute;
+        right: 19px;
+        top: 50%;
+        width: 8px;
+        height: 8px;
+        border-right: 1.75px solid #b8dcc6;
+        border-bottom: 1.75px solid #b8dcc6;
+        transform: translateY(-70%) rotate(45deg);
+        pointer-events: none;
+      }
+      .rental-application .application-select select.field__input {
+        -webkit-appearance: none;
+        appearance: none;
+        padding-right: 48px;
+        cursor: pointer;
+      }
+      html[data-theme="light"] .application-select::after { border-color: #17483f; }
+      @media (forced-colors: active) {
+        .rental-application .application-select select.field__input { appearance: auto; -webkit-appearance: auto; }
+        .application-select::after { display: none; }
+      }
     </style>
+      <link rel="stylesheet" href="./site-theme.css?v=1" />
   </head>
-  <body data-en-title="Rental Application | Private Property Holdings" data-es-title="Solicitud de arrendamiento | Administración Privada de Propiedades">
+  <body class="site-page rental-application" data-en-title="Rental Application | Alderive Properties" data-es-title="Solicitud de arrendamiento | Alderive Properties">
     <a class="skip-link" href="#main" data-en="Skip to content" data-es="Saltar al contenido">Skip to content</a>
 
-    <main id="main" class="application-page">
+    <header class="header" >
+      <div class="container header__inner">
       <button class="back-btn" id="backBtn" type="button" aria-label="Go back" data-en="← Back" data-es="← Volver">
         ← Back
       </button>
+        <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to light mode" aria-pressed="false">
+          <span class="theme-toggle__glyph" aria-hidden="true">
+            <svg class="theme-icon theme-icon--sun" viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="12" cy="12" r="4.25"></circle>
+              <g stroke-linecap="round">
+                <path d="M12 1.75v2.5M12 19.75v2.5M4.93 4.93l1.77 1.77M17.3 17.3l1.77 1.77M1.75 12h2.5M19.75 12h2.5M4.93 19.07l1.77-1.77M17.3 6.7l1.77-1.77"></path>
+              </g>
+            </svg>
+            <svg class="theme-icon theme-icon--moon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M18.5 14.5A7.5 7.5 0 0 1 9.5 5.5a7.5 7.5 0 1 0 9 9Z"></path>
+            </svg>
+          </span>
+        </button>
+
+      </div>
+    </header>
+
+    <main id="main" class="application-page">
+
       <div class="application-wrap">
         <header class="page-header">
           <p class="page-kicker" data-en="Application" data-es="Solicitud">Application</p>
@@ -659,7 +750,7 @@
         </section>
 
         <form id="rentalForm" class="application-form" action="https://formspree.io/f/mpqnkajy" method="POST">
-          <input type="hidden" name="_subject" value="New Rental Application - Private Property Holdings">
+          <input type="hidden" name="_subject" value="New Rental Application - Alderive Properties">
           <input type="hidden" name="_captcha" value="false">
           <input type="hidden" name="applicationID" id="appIdInput">
           <section class="form-block" aria-labelledby="property-information">
@@ -672,26 +763,26 @@
 
               <label class="field">
                 <span class="field__label" data-en="Bedrooms" data-es="Habitaciones">Bedrooms</span>
-                <select class="field__input" name="bedrooms">
+                <span class="application-select"><select class="field__input" name="bedrooms">
                   <option value="" data-en="Select" data-es="Seleccionar">Select</option>
                   <option>1</option>
                   <option>2</option>
                   <option>3</option>
                   <option>4</option>
                   <option>5+</option>
-                </select>
+                </select></span>
               </label>
 
               <label class="field">
                 <span class="field__label" data-en="Bathrooms" data-es="Baños">Bathrooms</span>
-                <select class="field__input" name="bathrooms">
+                <span class="application-select"><select class="field__input" name="bathrooms">
                   <option value="" data-en="Select" data-es="Seleccionar">Select</option>
                   <option>1</option>
                   <option>2</option>
                   <option>3</option>
                   <option>4</option>
                   <option>5+</option>
-                </select>
+                </select></span>
               </label>
 
               <label class="field">
@@ -706,14 +797,14 @@
 
               <label class="field">
                 <span class="field__label" data-en="Lease Duration" data-es="Duración del contrato">Lease Duration</span>
-                <select class="field__input" name="lease_duration">
+                <span class="application-select"><select class="field__input" name="lease_duration">
                   <option value="" data-en="Select" data-es="Seleccionar">Select</option>
                   <option data-en="6 months" data-es="6 meses">6 months</option>
                   <option data-en="12 months" data-es="12 meses">12 months</option>
                   <option data-en="18 months" data-es="18 meses">18 months</option>
                   <option data-en="24 months" data-es="24 meses">24 months</option>
                   <option data-en="Month-to-month" data-es="Mes a mes">Month-to-month</option>
-                </select>
+                </select></span>
               </label>
             </div>
           </section>
@@ -743,22 +834,22 @@
 
               <label class="field">
                 <span class="field__label" data-en="Gender" data-es="Género">Gender</span>
-                <select class="field__input" name="gender">
+                <span class="application-select"><select class="field__input" name="gender">
                   <option value="" data-en="Select" data-es="Seleccionar">Select</option>
                   <option data-en="Male" data-es="Masculino">Male</option>
                   <option data-en="Female" data-es="Femenino">Female</option>
-                </select>
+                </select></span>
               </label>
 
               <label class="field">
                 <span class="field__label" data-en="Residency Status" data-es="Estatus de residencia">Residency Status</span>
-                <select class="field__input" name="residency_status">
+                <span class="application-select"><select class="field__input" name="residency_status">
                   <option value="" data-en="Select" data-es="Seleccionar">Select</option>
                   <option data-en="US Citizen" data-es="Ciudadano estadounidense">US Citizen</option>
                   <option data-en="Permanent Resident" data-es="Residente permanente">Permanent Resident</option>
                   <option data-en="Temporary Resident" data-es="Residente temporal">Temporary Resident</option>
                   <option data-en="Other" data-es="Otro">Other</option>
-                </select>
+                </select></span>
               </label>
             </div>
           </section>
@@ -798,14 +889,14 @@
 
               <label class="field">
                 <span class="field__label" data-en="Other Income" data-es="Otros ingresos">Other Income</span>
-                <select class="field__input" name="other_income">
+                <span class="application-select"><select class="field__input" name="other_income">
                   <option value="" data-en="Select" data-es="Seleccionar">Select</option>
                   <option data-en="None" data-es="Ninguno">None</option>
                   <option data-en="Child Support / Alimony" data-es="Manutención / pensión alimenticia">Child Support / Alimony</option>
                   <option data-en="Disability / Benefits" data-es="Discapacidad / beneficios">Disability / Benefits</option>
                   <option data-en="Investments" data-es="Inversiones">Investments</option>
                   <option data-en="Other" data-es="Otro">Other</option>
-                </select>
+                </select></span>
               </label>
             </div>
           </section>
@@ -820,11 +911,11 @@
 
               <label class="field">
                 <span class="field__label" data-en="Evicted" data-es="Desalojado">Evicted</span>
-                <select class="field__input" name="evicted">
+                <span class="application-select"><select class="field__input" name="evicted">
                   <option value="" data-en="Select" data-es="Seleccionar">Select</option>
                   <option data-en="Yes" data-es="Sí">Yes</option>
                   <option data-en="No" data-es="No">No</option>
-                </select>
+                </select></span>
               </label>
 
               <label class="field">
@@ -834,11 +925,11 @@
 
               <label class="field">
                 <span class="field__label" data-en="Criminal Record" data-es="Antecedentes penales">Criminal Record</span>
-                <select class="field__input" name="criminal_record">
+                <span class="application-select"><select class="field__input" name="criminal_record">
                   <option value="" data-en="Select" data-es="Seleccionar">Select</option>
                   <option data-en="Yes" data-es="Sí">Yes</option>
                   <option data-en="No" data-es="No">No</option>
-                </select>
+                </select></span>
               </label>
 
               <label class="field">
@@ -858,14 +949,14 @@
 
               <label class="field">
                 <span class="field__label" data-en="Number of Adult Applicants" data-es="Número de solicitantes adultos">Number of Adult Applicants</span>
-                <select class="field__input" name="adult_applicants">
+                <span class="application-select"><select class="field__input" name="adult_applicants">
                   <option value="" data-en="Select" data-es="Seleccionar">Select</option>
                   <option>1</option>
                   <option>2</option>
                   <option>3</option>
                   <option>4</option>
                   <option>5+</option>
-                </select>
+                </select></span>
               </label>
 
               <label class="field">
@@ -875,7 +966,7 @@
 
               <label class="field">
                 <span class="field__label" data-en="Number of Occupants" data-es="Número de ocupantes">Number of Occupants</span>
-                <select class="field__input" name="occupants">
+                <span class="application-select"><select class="field__input" name="occupants">
                   <option value="" data-en="Select" data-es="Seleccionar">Select</option>
                   <option>1</option>
                   <option>2</option>
@@ -883,7 +974,7 @@
                   <option>4</option>
                   <option>5</option>
                   <option>6+</option>
-                </select>
+                </select></span>
               </label>
 
               <label class="field">
@@ -903,13 +994,13 @@
             <div class="form-grid">
               <label class="field">
                 <span class="field__label" data-en="Reference Type" data-es="Tipo de referencia">Reference Type</span>
-                <select class="field__input" name="reference_type">
+                <span class="application-select"><select class="field__input" name="reference_type">
                   <option value="" data-en="Select" data-es="Seleccionar">Select</option>
                   <option data-en="Landlord" data-es="Arrendador">Landlord</option>
                   <option data-en="Employer" data-es="Empleador">Employer</option>
                   <option data-en="Family" data-es="Familia">Family</option>
                   <option data-en="Other" data-es="Otro">Other</option>
-                </select>
+                </select></span>
               </label>
 
               <label class="field">
@@ -990,7 +1081,7 @@
         const templateID = 'template_5tabhtc';
         const publicKey = 'X-TTc6mZ7Y4RqKsdI';
 
-        emailjs.init({ publicKey: publicKey });
+        if (window.emailjs) emailjs.init({ publicKey: publicKey });
 
         function formDataToObject(fd) {
           const o = {};
@@ -1073,7 +1164,7 @@
           localStorage.setItem('applicantEmail', formData.get('email') || '');
           localStorage.setItem('applicantPhone', formData.get('phone') || '');
           localStorage.setItem('propertyAddress', formData.get('property_address') || '');
-          console.log('[RentalForm] FormData (all fields):', formDataToObject(formData));
+
 
           let accessToken = '';
           if (typeof window.saveApplicationRecord === 'function') {
@@ -1087,12 +1178,16 @@
                 paymentEmail: paymentEmail,
               });
               accessToken = saved && saved.access_token ? String(saved.access_token) : '';
+              if (!accessToken) throw new Error('Missing application access token');
               if (accessToken) {
                 localStorage.setItem('applicationAccessToken', accessToken);
               }
               console.log('[RentalForm] Receipt record saved');
             } catch (saveError) {
-              console.error('[RentalForm] Receipt record save failed (Formspree will still run):', saveError);
+              console.error('[RentalForm] Receipt record save failed:', saveError);
+              statusText.textContent = activeLang === 'es' ? 'No se pudo guardar la solicitud. Inténtelo de nuevo antes de pagar.' : 'Could not save your application. Please retry before making a payment.';
+              submitButton.disabled = false;
+              return;
             }
           }
 
@@ -1103,7 +1198,7 @@
             application_id: appId,
             payment_email: paymentEmail,
           };
-          console.log('[RentalForm] EmailJS payload:', emailPayload);
+
 
           try {
             const emailResult = await emailjs.send(serviceID, templateID, emailPayload);

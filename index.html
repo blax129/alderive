@@ -1,8 +1,10 @@
 <!doctype html>
 <html lang="en">
   <head>
+    <script>try { document.documentElement.dataset.theme = localStorage.getItem('alderive-theme') === 'light' ? 'light' : 'dark'; } catch (_) { document.documentElement.dataset.theme = 'dark'; }</script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script src="./page-loader.js?v=5"></script>
     <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="icon" href="/images/favicon-32.png" type="image/png" sizes="32x32" />
     <link rel="apple-touch-icon" href="/images/apple-touch-icon.png" />
@@ -10,110 +12,205 @@
     <meta name="theme-color" content="#2F4A6D" />
     <meta
       name="description"
-      content="Private Property Holdings — Professional and transparent rental coordination for privately managed properties."
+      content="Alderive Properties — Professional and transparent rental coordination for privately managed properties."
     />
     <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="Private Property Holdings" />
-    <meta property="og:title" content="Private Property Holdings" />
+    <meta property="og:site_name" content="Alderive Properties" />
+    <meta property="og:title" content="Alderive Properties" />
     <meta property="og:description" content="Professional and transparent rental coordination for privately managed properties." />
     <meta property="og:image" content="/images/og-image.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
-    <meta property="og:image:alt" content="Private Property Holdings logo" />
+    <meta property="og:image:alt" content="Alderive Properties logo" />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="Private Property Holdings" />
+    <meta name="twitter:title" content="Alderive Properties" />
     <meta name="twitter:description" content="Professional and transparent rental coordination for privately managed properties." />
     <meta name="twitter:image" content="/images/og-image.png" />
-    <meta name="twitter:image:alt" content="Private Property Holdings logo" />
+    <meta name="twitter:image:alt" content="Alderive Properties logo" />
     <link rel="alternate" href="index.html" hreflang="en" />
     <link rel="alternate" href="es.html" hreflang="es" />
-    <title>Private Property Holdings</title>
+    <title>Alderive Properties</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="./style.css" />
+    <script>
+      try {
+        document.documentElement.dataset.theme = localStorage.getItem("alderive-theme") === "light" ? "light" : "dark";
+      } catch {}
+    </script>
+    <link rel="preload" as="image" href="./images/home-neighborhood.jpg" fetchpriority="high" />
+    <link rel="stylesheet" href="./style.css?v=refined-navigation-26" />
     <style>
       .header .brand {
-        margin-left: -50px;
+        margin-left: 0;
       }
 
       .brand__logo {
-        width: clamp(122px, 34vw, 200px);
+        width: clamp(180px, 28vw, 280px);
         height: auto;
         display: block;
       }
 
       @media (max-width: 768px) {
         .header .brand {
-          margin-left: -28px;
+          margin-left: 0;
         }
       }
     </style>
+      <link rel="stylesheet" href="./site-theme.css?v=1" />
   </head>
-  <body class="home-with-floating-apply" data-en-title="Private Property Holdings" data-es-title="Private Property Holdings">
+  <body class="site-page home-with-floating-apply home-intro-editorial" data-en-title="Alderive Properties" data-es-title="Alderive Properties">
     <a class="skip-link" href="#main" data-en="Skip to content" data-es="Saltar al contenido">Skip to content</a>
 
     <header class="header" >
       <div class="container header__inner">
-        <a class="brand" href="./index.html" aria-label="Private Property Holdings home">
-          <img class="brand__logo" src="./images/private-property-logo.svg" alt="Private Property Holdings logo" />
+        <a class="brand" href="./index.html" aria-label="Alderive Properties home">
+          <img class="brand__logo" src="./images/private-property-logo-dark.svg" data-logo-light="./images/private-property-logo.svg" data-logo-dark="./images/private-property-logo-dark.svg" alt="Alderive Properties logo" />
         </a>
-
-        <button class="hamburger" type="button" onclick="toggleMenu()" aria-label="Open menu" aria-expanded="false" aria-controls="nav" id="nav-toggle">☰</button>
-
-        <nav class="nav" id="nav">
-          <a href="#leasing" data-en="Rental Process" data-es="Proceso de alquiler">Rental Process</a>
-          <a href="#services" data-en="Services" data-es="Servicios">Services</a>
-          <a href="#process" data-en="FAQ" data-es="Preguntas frecuentes">FAQ</a>
-          <a href="#contact" data-en="Contact" data-es="Contacto">Contact</a>
-          <div class="header__actions header__actions--mobile">
-            <div class="language-toggle" aria-label="Language selector">
-              <a class="lang-option" data-lang="en" href="./index.html"><span class="lang-flag" aria-hidden="true">🇺🇸</span><span>EN</span></a>
-              <span class="lang-separator">|</span>
-              <a class="lang-option" data-lang="es" href="./es.html"><span class="lang-flag" aria-hidden="true">🇪🇸</span><span>ES</span></a>
-            </div>
-          </div>
-        </nav>
-
-        <div class="header__actions header__actions--desktop">
-          <div class="language-toggle" aria-label="Language selector">
-            <a class="lang-option" data-lang="en" href="./index.html"><span class="lang-flag" aria-hidden="true">🇺🇸</span><span>EN</span></a>
-            <span class="lang-separator">|</span>
-            <a class="lang-option" data-lang="es" href="./es.html"><span class="lang-flag" aria-hidden="true">🇪🇸</span><span>ES</span></a>
-          </div>
+        <div class="home-header-controls">
+        <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Switch to light mode" aria-pressed="false">
+          <span class="theme-toggle__glyph" aria-hidden="true">
+            <svg class="theme-icon theme-icon--sun" viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="12" cy="12" r="4.25"></circle>
+              <g stroke-linecap="round">
+                <path d="M12 1.75v2.5M12 19.75v2.5M4.93 4.93l1.77 1.77M17.3 17.3l1.77 1.77M1.75 12h2.5M19.75 12h2.5M4.93 19.07l1.77-1.77M17.3 6.7l1.77-1.77"></path>
+              </g>
+            </svg>
+            <svg class="theme-icon theme-icon--moon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M18.5 14.5A7.5 7.5 0 0 1 9.5 5.5a7.5 7.5 0 1 0 9 9Z"></path>
+            </svg>
+          </span>
+        </button>
+          <details class="section-menu">
+            <summary aria-label="Menu"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"/></svg><span>Menu</span></summary>
+            <nav class="section-menu__panel" aria-label="Main navigation">
+              <p class="section-menu__eyebrow">EXPLORE ALDERIVE</p>
+              <a href="#services">Services</a>
+<a href="#why-work">Why work with us</a>
+<a href="#leasing">Rental process</a>
+<a href="#process">FAQ</a>
+<a href="#testimonials">Applicant reviews</a>
+<a href="#contact">Contact</a>
+              <p class="section-menu__language-label">Language</p>
+              <div class="persistent-language" aria-label="Language">
+                <a href="./index.html" data-page-language="en" lang="en" aria-current="page"><span aria-hidden="true">🇺🇸</span> English</a>
+                <a href="./es.html" data-page-language="es" lang="es" ><span aria-hidden="true">🇪🇸</span> Español</a>
+              </div>
+            </nav>
+          </details>
         </div>
 
       </div>
     </header>
 
-
-    <main id="main">
+<main id="main">
       <section class="hero portfolio-hero">
         <div class="portfolio-hero__media" aria-hidden="true">
-          <img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1800&q=82" alt="" />
+          <img src="./images/home-neighborhood.jpg" alt="" loading="eager" fetchpriority="high" decoding="async" />
+          <video class="portfolio-hero__video" muted playsinline preload="none" data-src="./videos/home-neighborhood.mp4"></video>
+          <video class="portfolio-hero__video" muted playsinline preload="none" data-src="./videos/home-living-room.mp4"></video>
+          <video class="portfolio-hero__video" muted playsinline preload="none" data-src="./videos/home-interior.mp4"></video>
+          <video class="portfolio-hero__video" muted playsinline preload="none" data-src="./videos/home-bedroom.mp4"></video>
         </div>
         <div class="container portfolio-hero__inner">
           <div class="hero__content reveal">
             <section class="hero-overview" aria-label="Private rental management introduction">
-              <h1 class="hero-overview__title">Private Property Management</h1>
-              <p>
-                Private Property Management provides dependable rental support
-                for privately managed homes and prospective tenants, grounded in
-                consistency, clarity, and accountability throughout the leasing
-                process.
-              </p>
-              <p>
-                From first inquiries and scheduling through application guidance
-                and ongoing communication, our process is organized and
-                service-driven. We set clear expectations, follow through
-                promptly, and coordinate carefully so owners and applicants alike
-                experience a smooth, efficient, and respectful journey.
-              </p>
+              <div class="hero-overview__heading">
+                <p class="hero-overview__eyebrow" data-en="PRIVATE PROPERTY MANAGEMENT" data-es="GESTIÓN DE PROPIEDADES PRIVADAS">PRIVATE PROPERTY MANAGEMENT</p>
+                <h1 class="hero-overview__title">Alderive <em data-en="Properties" data-es="Propiedades">Properties</em></h1>
+              </div>
+              <div class="hero-overview__copy">
+                <p data-en="Alderive Properties provides dependable rental support for privately managed homes and prospective tenants, grounded in consistency, clarity, and accountability throughout the leasing process." data-es="Alderive Properties ofrece un apoyo confiable para viviendas administradas de forma privada y futuros inquilinos, con constancia, claridad y responsabilidad durante todo el proceso de alquiler.">
+                  Alderive Properties provides dependable rental support for
+                  privately managed homes and prospective tenants, grounded in
+                  consistency, clarity, and accountability throughout the leasing
+                  process.
+                </p>
+                <p data-en="From first inquiries and scheduling through application guidance and ongoing communication, our process is organized and service-driven. We set clear expectations, follow through promptly, and coordinate carefully so owners and applicants alike experience a smooth, efficient, and respectful journey." data-es="Desde las primeras consultas y la programación hasta la orientación sobre solicitudes y la comunicación continua, nuestro proceso está organizado y orientado al servicio. Establecemos expectativas claras, respondemos con prontitud y coordinamos con cuidado para que propietarios y solicitantes vivan un recorrido fluido, eficiente y respetuoso.">
+                  From first inquiries and scheduling through application guidance
+                  and ongoing communication, our process is organized and
+                  service-driven. We set clear expectations, follow through
+                  promptly, and coordinate carefully so owners and applicants alike
+                  experience a smooth, efficient, and respectful journey.
+                </p>
+              </div>
+              <ul class="hero-overview__principles" aria-label="Our approach">
+                <li><span aria-hidden="true">01</span><strong data-en="Consistency" data-es="Constancia">Consistency</strong></li>
+                <li><span aria-hidden="true">02</span><strong data-en="Clarity" data-es="Claridad">Clarity</strong></li>
+                <li><span aria-hidden="true">03</span><strong data-en="Accountability" data-es="Responsabilidad">Accountability</strong></li>
+              </ul>
             </section>
           </div>
+        </div>
+      </section>
+
+      <section id="markets" class="section rental-markets" aria-labelledby="rental-markets-title">
+        <div class="container">
+          <details class="rental-markets__dropdown">
+            <summary class="rental-markets__summary">
+              <span class="rental-markets__icon" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M19 10c0 5-7 11-7 11S5 15 5 10a7 7 0 1 1 14 0Z"/><circle cx="12" cy="10" r="2.5"/></svg></span>
+              <span class="rental-markets__heading">
+                <span class="rental-markets__label" id="rental-markets-title" data-en="Current rental markets" data-es="Mercados de alquiler actuales">Current rental markets</span>
+                <span class="rental-markets__description" data-en="Explore our markets by state" data-es="Explora nuestros mercados por estado">Explore our markets by state</span>
+              </span>
+              <span class="rental-markets__toggle" aria-hidden="true"><span class="rental-markets__chevron"></span></span>
+            </summary>
+            <ul class="rental-markets__list" aria-labelledby="rental-markets-title" tabindex="0">
+              <li>Alabama</li>
+              <li>Alaska</li>
+              <li>Arizona</li>
+              <li>Arkansas</li>
+              <li>California</li>
+              <li>Colorado</li>
+              <li>Connecticut</li>
+              <li>Delaware</li>
+              <li>Florida</li>
+              <li>Georgia</li>
+              <li>Hawaii</li>
+              <li>Idaho</li>
+              <li>Illinois</li>
+              <li>Indiana</li>
+              <li>Iowa</li>
+              <li>Kansas</li>
+              <li>Kentucky</li>
+              <li>Louisiana</li>
+              <li>Maine</li>
+              <li>Maryland</li>
+              <li>Massachusetts</li>
+              <li>Michigan</li>
+              <li>Minnesota</li>
+              <li>Mississippi</li>
+              <li>Missouri</li>
+              <li>Montana</li>
+              <li>Nebraska</li>
+              <li>Nevada</li>
+              <li>New Hampshire</li>
+              <li>New Jersey</li>
+              <li>New Mexico</li>
+              <li>New York</li>
+              <li>North Carolina</li>
+              <li>North Dakota</li>
+              <li>Ohio</li>
+              <li>Oklahoma</li>
+              <li>Oregon</li>
+              <li>Pennsylvania</li>
+              <li>Rhode Island</li>
+              <li>South Carolina</li>
+              <li>South Dakota</li>
+              <li>Tennessee</li>
+              <li>Texas</li>
+              <li>Utah</li>
+              <li>Vermont</li>
+              <li>Virginia</li>
+              <li>Washington</li>
+              <li>West Virginia</li>
+              <li>Wisconsin</li>
+              <li>Wyoming</li>
+            </ul>
+          </details>
         </div>
       </section>
 
@@ -127,53 +224,70 @@
 
           <div class="services-grid">
             <article class="service-card reveal">
-              <span class="service-card__number">01</span>
+              <span class="service-card__number" aria-hidden="true">01</span>
               <h3>Tenant screening and application review</h3>
             </article>
             <article class="service-card reveal">
-              <span class="service-card__number">02</span>
+              <span class="service-card__number" aria-hidden="true">02</span>
               <h3>Rental listing and marketing support</h3>
             </article>
             <article class="service-card reveal">
-              <span class="service-card__number">03</span>
+              <span class="service-card__number" aria-hidden="true">03</span>
               <h3>Lease Coordination</h3>
             </article>
             <article class="service-card reveal">
-              <span class="service-card__number">04</span>
+              <span class="service-card__number" aria-hidden="true">04</span>
               <h3>Scheduling Property Tours</h3>
             </article>
             <article class="service-card reveal">
-              <span class="service-card__number">05</span>
+              <span class="service-card__number" aria-hidden="true">05</span>
               <h3>Managing rental inquiries and tenant communication</h3>
             </article>
             <article class="service-card reveal">
-              <span class="service-card__number">06</span>
+              <span class="service-card__number" aria-hidden="true">06</span>
               <h3>Guiding applicants through the approval process</h3>
             </article>
           </div>
         </div>
       </section>
 
-      <section class="section why-work" aria-labelledby="why-work-title">
+      <section id="why-work" class="section why-work" aria-labelledby="why-work-title">
         <div class="container">
           <div class="section__header section__header--center reveal">
-            <h2 id="why-work-title" class="section__title">Why Work With Private Property Holdings</h2>
+            <h2 id="why-work-title" class="section__title">Why Work With Alderive Properties</h2>
           </div>
 
-          <figure class="why-work__media reveal">
-            <div class="community-slider why-work__slider" aria-label="Private Property Holdings team photos">
-              <img class="slide active" src="./images/community-team.jpg" alt="Private Property Holdings team collaborating together" />
-              <img class="slide" src="./images/community-advocates.jpg" alt="Private Property Holdings team at a community advocacy event" />
-              <img class="slide" src="./images/community-erpac-team.jpg" alt="Private Property Holdings team at an ERPAC community gathering" />
-            </div>
-          </figure>
-
           <ul class="why-work__list">
-            <li class="why-work__item reveal">Professional and organized rental management process</li>
-            <li class="why-work__item reveal">Clear and transparent communication</li>
-            <li class="why-work__item reveal">Responsive support for applicants and inquiries</li>
-            <li class="why-work__item reveal">Reliable coordination between tenants and property owners</li>
-            <li class="why-work__item reveal">A focus on professionalism and smooth leasing experiences</li>
+            <li class="why-work__item reveal">
+              <span class="why-work__eyebrow">The Alderive difference</span>
+              <span class="why-work__number" aria-hidden="true">01</span>
+              <h3 class="why-work__benefit">Organized from the start</h3>
+              <p class="why-work__description">Professional and organized rental management process</p>
+            </li>
+            <li class="why-work__item reveal">
+              <span class="why-work__eyebrow">The Alderive difference</span>
+              <span class="why-work__number" aria-hidden="true">02</span>
+              <h3 class="why-work__benefit">Clarity at every step</h3>
+              <p class="why-work__description">Clear and transparent communication</p>
+            </li>
+            <li class="why-work__item reveal">
+              <span class="why-work__eyebrow">The Alderive difference</span>
+              <span class="why-work__number" aria-hidden="true">03</span>
+              <h3 class="why-work__benefit">Support when it matters</h3>
+              <p class="why-work__description">Responsive support for applicants and inquiries</p>
+            </li>
+            <li class="why-work__item reveal">
+              <span class="why-work__eyebrow">The Alderive difference</span>
+              <span class="why-work__number" aria-hidden="true">04</span>
+              <h3 class="why-work__benefit">Everyone on the same page</h3>
+              <p class="why-work__description">Reliable coordination between tenants and property owners</p>
+            </li>
+            <li class="why-work__item reveal">
+              <span class="why-work__eyebrow">The Alderive difference</span>
+              <span class="why-work__number" aria-hidden="true">05</span>
+              <h3 class="why-work__benefit">A smoother way to lease</h3>
+              <p class="why-work__description">A focus on professionalism and smooth leasing experiences</p>
+            </li>
           </ul>
         </div>
       </section>
@@ -184,37 +298,58 @@
             <h2 class="section__title" data-en="How the Rental Process Works" data-es="Cómo funciona el proceso de alquiler">How the Rental Process Works</h2>
           </div>
 
-          <ol class="rental-process__cards process-grid">
-            <li class="rental-process__card reveal">
-              <span class="process-step">01</span>
-              <h3 class="rental-process__title" data-en="View Property Details" data-es="Ver detalles de la propiedad">View Property Details</h3>
+          <ol class="rental-process__cards process-grid process-dropdowns">
+            <li class="rental-process__card">
+              <details class="process-dropdown">
+                <summary>
+                  <span class="process-step" aria-hidden="true">01</span>
+                  <h3 class="rental-process__title" data-en="View Property Details" data-es="Ver detalles de la propiedad">View Property Details</h3>
+                  <span class="process-dropdown__action"><span class="process-dropdown__closed">View details</span><span class="process-dropdown__open">Hide details</span><span class="process-dropdown__chevron" aria-hidden="true"></span></span>
+                </summary>
+                <p class="rental-process__text" data-en="Review the property details before starting your application." data-es="Revise los detalles de la propiedad antes de comenzar su solicitud.">Review the property details before starting your application.</p>
+              </details>
             </li>
 
-            <li class="rental-process__card reveal">
-              <span class="process-step">02</span>
-              <h3 class="rental-process__title" data-en="Submit Application" data-es="Enviar solicitud">Submit Application</h3>
-              <p class="rental-process__text" data-en="Complete the rental application form with accurate information." data-es="Complete el formulario de solicitud de alquiler con información precisa.">
+            <li class="rental-process__card">
+              <details class="process-dropdown">
+                <summary>
+                  <span class="process-step" aria-hidden="true">02</span>
+                  <h3 class="rental-process__title" data-en="Submit Application" data-es="Enviar solicitud">Submit Application</h3>
+                  <span class="process-dropdown__action"><span class="process-dropdown__closed">View details</span><span class="process-dropdown__open">Hide details</span><span class="process-dropdown__chevron" aria-hidden="true"></span></span>
+                </summary>
+                <p class="rental-process__text" data-en="Complete the rental application form with accurate information." data-es="Complete el formulario de solicitud de alquiler con información precisa.">
                 Complete the rental application form with accurate information.
               </p>
+              </details>
             </li>
 
-            <li class="rental-process__card reveal">
-              <span class="process-step">03</span>
-              <h3 class="rental-process__title" data-en="Refundable Application Fee Payment" data-es="Pago reembolsable de solicitud">Refundable Application Fee Payment</h3>
-              <p class="rental-process__text" data-en="A refundable application fee is a payment that will be returned to you if your application is not approved or if you decide not to move forward after the tour." data-es="Un cargo de solicitud reembolsable es un pago que se le devolverá si su solicitud no es aprobada o si decide no continuar después del recorrido.">
+            <li class="rental-process__card">
+              <details class="process-dropdown">
+                <summary>
+                  <span class="process-step" aria-hidden="true">03</span>
+                  <h3 class="rental-process__title" data-en="Refundable Application Fee Payment" data-es="Pago reembolsable de solicitud">Refundable Application Fee Payment</h3>
+                  <span class="process-dropdown__action"><span class="process-dropdown__closed">View details</span><span class="process-dropdown__open">Hide details</span><span class="process-dropdown__chevron" aria-hidden="true"></span></span>
+                </summary>
+                <p class="rental-process__text" data-en="A refundable application fee is a payment that will be returned to you if your application is not approved or if you decide not to move forward after the tour." data-es="Un cargo de solicitud reembolsable es un pago que se le devolverá si su solicitud no es aprobada o si decide no continuar después del recorrido.">
                 A refundable application fee is a payment that will be returned
                 to you if your application is not approved or if you decide not
                 to move forward after the tour.
               </p>
+              </details>
             </li>
 
-            <li class="rental-process__card reveal">
-              <span class="process-step">04</span>
-              <h3 class="rental-process__title" data-en="Next Steps" data-es="Próximos pasos">Next Steps</h3>
-              <p class="rental-process__text" data-en="Qualified applicants will be contacted with updates, tour details, or further instructions." data-es="Los solicitantes calificados serán contactados con actualizaciones, detalles del recorrido o instrucciones adicionales.">
+            <li class="rental-process__card">
+              <details class="process-dropdown">
+                <summary>
+                  <span class="process-step" aria-hidden="true">04</span>
+                  <h3 class="rental-process__title" data-en="Next Steps" data-es="Próximos pasos">Next Steps</h3>
+                  <span class="process-dropdown__action"><span class="process-dropdown__closed">View details</span><span class="process-dropdown__open">Hide details</span><span class="process-dropdown__chevron" aria-hidden="true"></span></span>
+                </summary>
+                <p class="rental-process__text" data-en="Qualified applicants will be contacted with updates, tour details, or further instructions." data-es="Los solicitantes calificados serán contactados con actualizaciones, detalles del recorrido o instrucciones adicionales.">
                 Qualified applicants will be contacted with updates, tour
                 details, or further instructions.
               </p>
+              </details>
             </li>
           </ol>
 
@@ -229,6 +364,7 @@
 
           <div class="faq-list">
             <article class="faq-item reveal">
+              <span class="faq-item__number" aria-hidden="true">01</span>
               <button class="faq-item__question" type="button" aria-expanded="false">
                 <span data-en="How do I apply for a rental?" data-es="¿Cómo solicito un alquiler?">How do I apply for a rental?</span>
                 <span class="faq-item__icon" aria-hidden="true"></span>
@@ -241,6 +377,7 @@
             </article>
 
             <article class="faq-item reveal">
+              <span class="faq-item__number" aria-hidden="true">02</span>
               <button class="faq-item__question" type="button" aria-expanded="false">
                 <span data-en="Is there an application fee?" data-es="¿Hay un cargo de solicitud?">Is there an application fee?</span>
                 <span class="faq-item__icon" aria-hidden="true"></span>
@@ -253,6 +390,7 @@
             </article>
 
             <article class="faq-item reveal">
+              <span class="faq-item__number" aria-hidden="true">03</span>
               <button class="faq-item__question" type="button" aria-expanded="false">
                 <span data-en="Are listings always available?" data-es="¿Los anuncios siempre están disponibles?">Are listings always available?</span>
                 <span class="faq-item__icon" aria-hidden="true"></span>
@@ -265,6 +403,7 @@
             </article>
 
             <article class="faq-item reveal">
+              <span class="faq-item__number" aria-hidden="true">04</span>
               <button class="faq-item__question" type="button" aria-expanded="false">
                 <span data-en="How will I be contacted after applying?" data-es="¿Cómo me contactarán después de solicitar?">How will I be contacted after applying?</span>
                 <span class="faq-item__icon" aria-hidden="true"></span>
@@ -289,10 +428,10 @@
           <div class="testimonial-list" id="testimonialList">
             <article class="testimonial-card reveal">
               <div class="testimonial-card__header">
-                <span class="testimonial-card__avatar testimonial-card__avatar--green" aria-hidden="true">TM</span>
+                <img class="testimonial-card__avatar" src="images/applicant-avatars/profile.svg" alt="" width="42" height="42" loading="lazy" decoding="async" />
                 <div class="testimonial-card__meta">
-                  <p class="testimonial-card__name">Tyler M.</p>
-                  <p class="testimonial-card__date" data-en="March 16, 2025" data-es="16 de marzo de 2025">March 16, 2025</p>
+                  <p class="testimonial-card__name">Kenna K.</p>
+                  <p class="testimonial-card__date" data-en="March 16, 2026" data-es="16 de marzo de 2026">March 16, 2026</p>
                 </div>
               </div>
               <p class="testimonial-card__quote" data-en="Applied on a Sunday and got a reply Monday morning. Straightforward process." data-es="Solicité un domingo y recibí respuesta el lunes por la mañana. Proceso sencillo.">Applied on a Sunday and got a reply Monday morning. Straightforward process.</p>
@@ -300,10 +439,10 @@
 
             <article class="testimonial-card reveal">
               <div class="testimonial-card__header">
-                <span class="testimonial-card__avatar testimonial-card__avatar--purple" aria-hidden="true">RK</span>
+                <img class="testimonial-card__avatar" src="images/applicant-avatars/profile.svg" alt="" width="42" height="42" loading="lazy" decoding="async" />
                 <div class="testimonial-card__meta">
-                  <p class="testimonial-card__name">Ryan K.</p>
-                  <p class="testimonial-card__date" data-en="April 2, 2025" data-es="2 de abril de 2025">April 2, 2025</p>
+                  <p class="testimonial-card__name">Donise L.</p>
+                  <p class="testimonial-card__date" data-en="April 2, 2026" data-es="2 de abril de 2026">April 2, 2026</p>
                 </div>
               </div>
               <p class="testimonial-card__quote" data-en="They walked me through the fee and refund policy upfront. No surprises." data-es="Me explicaron la tarifa y la política de reembolso de antemano. Sin sorpresas.">They walked me through the fee and refund policy upfront. No surprises.</p>
@@ -311,10 +450,10 @@
 
             <article class="testimonial-card reveal">
               <div class="testimonial-card__header">
-                <span class="testimonial-card__avatar testimonial-card__avatar--teal" aria-hidden="true">ML</span>
+                <img class="testimonial-card__avatar" src="images/applicant-avatars/profile.svg" alt="" width="42" height="42" loading="lazy" decoding="async" />
                 <div class="testimonial-card__meta">
-                  <p class="testimonial-card__name">Melissa L.</p>
-                  <p class="testimonial-card__date" data-en="May 18, 2025" data-es="18 de mayo de 2025">May 18, 2025</p>
+                  <p class="testimonial-card__name">Esteban S.</p>
+                  <p class="testimonial-card__date" data-en="May 18, 2026" data-es="18 de mayo de 2026">May 18, 2026</p>
                 </div>
               </div>
               <p class="testimonial-card__quote" data-en="Payment instructions were clear and the review moved fast." data-es="Las instrucciones de pago fueron claras y la revisión avanzó rápido.">Payment instructions were clear and the review moved fast.</p>
@@ -322,21 +461,21 @@
 
             <article class="testimonial-card reveal">
               <div class="testimonial-card__header">
-                <span class="testimonial-card__avatar testimonial-card__avatar--olive" aria-hidden="true">CD</span>
+                <img class="testimonial-card__avatar" src="images/applicant-avatars/profile.svg" alt="" width="42" height="42" loading="lazy" decoding="async" />
                 <div class="testimonial-card__meta">
-                  <p class="testimonial-card__name">Chris D.</p>
-                  <p class="testimonial-card__date" data-en="June 8, 2025" data-es="8 de junio de 2025">June 8, 2025</p>
+                  <p class="testimonial-card__name">Ashley J.</p>
+                  <p class="testimonial-card__date" data-en="June 8, 2026" data-es="8 de junio de 2026">June 8, 2026</p>
                 </div>
               </div>
               <p class="testimonial-card__quote" data-en="Good communication throughout. They kept me updated after I submitted." data-es="Buena comunicación en todo momento. Me mantuvieron informado después de enviar.">Good communication throughout. They kept me updated after I submitted.</p>
             </article>
 
-            <article class="testimonial-card reveal">
+            <article class="testimonial-card testimonial-card--extra" hidden>
               <div class="testimonial-card__header">
-                <span class="testimonial-card__avatar testimonial-card__avatar--brown" aria-hidden="true">JH</span>
+                <img class="testimonial-card__avatar" src="images/applicant-avatars/profile.svg" alt="" width="42" height="42" loading="lazy" decoding="async" />
                 <div class="testimonial-card__meta">
-                  <p class="testimonial-card__name">Jordan H.</p>
-                  <p class="testimonial-card__date" data-en="July 25, 2025" data-es="25 de julio de 2025">July 25, 2025</p>
+                  <p class="testimonial-card__name">Mellanie B.</p>
+                  <p class="testimonial-card__date" data-en="July 25, 2026" data-es="25 de julio de 2026">July 25, 2026</p>
                 </div>
               </div>
               <p class="testimonial-card__quote" data-en="Professional from start to finish. The process felt well organized." data-es="Profesional de principio a fin. El proceso se sintió bien organizado.">Professional from start to finish. The process felt well organized.</p>
@@ -344,10 +483,10 @@
 
             <article class="testimonial-card testimonial-card--extra" hidden>
               <div class="testimonial-card__header">
-                <span class="testimonial-card__avatar testimonial-card__avatar--slate" aria-hidden="true">AP</span>
+                <img class="testimonial-card__avatar" src="images/applicant-avatars/profile.svg" alt="" width="42" height="42" loading="lazy" decoding="async" />
                 <div class="testimonial-card__meta">
-                  <p class="testimonial-card__name">Alicia P.</p>
-                  <p class="testimonial-card__date" data-en="August 11, 2025" data-es="11 de agosto de 2025">August 11, 2025</p>
+                  <p class="testimonial-card__name">Jay G.</p>
+                  <p class="testimonial-card__date" data-en="August 11, 2026" data-es="11 de agosto de 2026">August 11, 2026</p>
                 </div>
               </div>
               <p class="testimonial-card__quote" data-en="I appreciated how clear the next steps were after submitting. Everything felt intentional." data-es="Aprecié lo claros que fueron los siguientes pasos después de enviar. Todo se sintió intencional.">I appreciated how clear the next steps were after submitting. Everything felt intentional.</p>
@@ -355,47 +494,15 @@
 
             <article class="testimonial-card testimonial-card--extra" hidden>
               <div class="testimonial-card__header">
-                <span class="testimonial-card__avatar testimonial-card__avatar--navy" aria-hidden="true">DW</span>
+                <img class="testimonial-card__avatar" src="images/applicant-avatars/profile.svg" alt="" width="42" height="42" loading="lazy" decoding="async" />
                 <div class="testimonial-card__meta">
-                  <p class="testimonial-card__name">David W.</p>
-                  <p class="testimonial-card__date" data-en="September 3, 2025" data-es="3 de septiembre de 2025">September 3, 2025</p>
+                  <p class="testimonial-card__name">Delilah E.</p>
+                  <p class="testimonial-card__date" data-en="September 3, 2026" data-es="3 de septiembre de 2026">September 3, 2026</p>
                 </div>
               </div>
               <p class="testimonial-card__quote" data-en="Questions were answered quickly and the application form was easy to complete." data-es="Respondieron mis preguntas con rapidez y el formulario de solicitud fue fácil de completar.">Questions were answered quickly and the application form was easy to complete.</p>
             </article>
 
-            <article class="testimonial-card testimonial-card--extra" hidden>
-              <div class="testimonial-card__header">
-                <span class="testimonial-card__avatar testimonial-card__avatar--steel" aria-hidden="true">SN</span>
-                <div class="testimonial-card__meta">
-                  <p class="testimonial-card__name">Sara N.</p>
-                  <p class="testimonial-card__date" data-en="October 19, 2025" data-es="19 de octubre de 2025">October 19, 2025</p>
-                </div>
-              </div>
-              <p class="testimonial-card__quote" data-en="The team was respectful of my time and explained timelines without pressure." data-es="El equipo respetó mi tiempo y explicó los plazos sin presión.">The team was respectful of my time and explained timelines without pressure.</p>
-            </article>
-
-            <article class="testimonial-card testimonial-card--extra" hidden>
-              <div class="testimonial-card__header">
-                <span class="testimonial-card__avatar testimonial-card__avatar--ink" aria-hidden="true">MB</span>
-                <div class="testimonial-card__meta">
-                  <p class="testimonial-card__name">Marcus B.</p>
-                  <p class="testimonial-card__date" data-en="November 7, 2025" data-es="7 de noviembre de 2025">November 7, 2025</p>
-                </div>
-              </div>
-              <p class="testimonial-card__quote" data-en="Chime payment details were easy to follow and confirmation was handled promptly." data-es="Los detalles de pago por Chime fueron fáciles de seguir y la confirmación se gestionó con prontitud.">Chime payment details were easy to follow and confirmation was handled promptly.</p>
-            </article>
-
-            <article class="testimonial-card testimonial-card--extra" hidden>
-              <div class="testimonial-card__header">
-                <span class="testimonial-card__avatar testimonial-card__avatar--mist" aria-hidden="true">EL</span>
-                <div class="testimonial-card__meta">
-                  <p class="testimonial-card__name">Elena R.</p>
-                  <p class="testimonial-card__date" data-en="December 14, 2025" data-es="14 de diciembre de 2025">December 14, 2025</p>
-                </div>
-              </div>
-              <p class="testimonial-card__quote" data-en="Felt like a real management process—organized, transparent, and easy to trust." data-es="Se sintió como un proceso de administración real: organizado, transparente y fácil de confiar.">Felt like a real management process—organized, transparent, and easy to trust.</p>
-            </article>
           </div>
 
           <div class="testimonials-more-wrap">
@@ -432,6 +539,18 @@
               <p id="feedbackStatus" class="feedback-status" role="status" aria-live="polite"></p>
             </form>
           </div>
+
+          <section id="team" class="section team-photo-strip" aria-label="Alderive Properties team photos">
+            <div class="container">
+              <figure class="why-work__media">
+                <div class="community-slider why-work__slider" aria-label="Alderive Properties team photos">
+                  <img class="slide active" src="./images/community-erpac-team.jpg" alt="Alderive Properties team at a community gathering" width="1400" height="1400" loading="lazy" decoding="async" />
+                  <img class="slide" src="./images/community-team.jpg" alt="Alderive Properties team collaborating together" width="1200" height="900" loading="lazy" decoding="async" />
+                  <img class="slide" src="./images/community-advocates.jpg" alt="Alderive Properties team at a community advocacy event" width="1200" height="900" loading="lazy" decoding="async" />
+                </div>
+              </figure>
+            </div>
+          </section>
         </div>
       </section>
 
@@ -441,74 +560,24 @@
       <div class="container footer__grid">
         <div class="footer__brand">
           <div class="brand brand--footer">
-            <img class="brand__logo" src="./images/private-property-logo.svg" alt="Private Property Holdings logo" />
+            <img class="brand__logo" src="./images/private-property-logo-dark.svg" data-logo-light="./images/private-property-logo.svg" data-logo-dark="./images/private-property-logo-dark.svg" alt="Alderive Properties logo" />
           </div>
           <div class="footer__contact" id="contact" aria-label="Footer contact phone number">
-            <span>Contact</span>
-            <a class="footer__phone" href="tel:+18142547767">+1 814-254-7767</a>
-            <a class="footer__email" href="mailto:infoprivateproperty.holdings@gmail.com">infoprivateproperty.holdings@gmail.com</a>
+            <span>Get in Touch</span>
+            <a class="footer__phone" href="tel:+18142547767"><svg class="footer__contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.79 19.79 0 0 1 2.12 4.18 2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.12.96.36 1.9.7 2.8a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.84.58 2.8.7A2 2 0 0 1 22 16.92Z"/></svg>+1 814-254-7767</a>
+            <a class="footer__email" href="mailto:infoprivateproperty.holdings@gmail.com"><svg class="footer__contact-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>infoprivateproperty.holdings@gmail.com</a>
           </div>
         </div>
       </div>
 
       <div class="container footer__bottom">
-        <p>© 2026 Private Property Holdings. Privately managed rentals.</p>
+        <p>© 2026 Alderive Properties. Privately managed rentals.</p>
         <p class="footer__legal">Privacy • Terms</p>
       </div>
     </footer>
     <a href="/apply.html" class="floating-apply-btn" data-en="Start Application" data-es="Aplicar ahora">Start Application</a>
-    <script src="./script.js"></script>
+    <script src="./script.js?v=language-control-21"></script>
     <script>
-      function toggleMenu() {
-        var nav = document.getElementById('nav');
-        var btn = document.getElementById('nav-toggle');
-        nav.classList.toggle('active');
-        if (btn) {
-          btn.setAttribute('aria-expanded', nav.classList.contains('active'));
-        }
-      }
-
-      function closeMenu() {
-        var nav = document.getElementById('nav');
-        var btn = document.getElementById('nav-toggle');
-        if (!nav) return;
-        nav.classList.remove('active');
-        nav.classList.remove('open');
-        if (btn) btn.setAttribute('aria-expanded', 'false');
-      }
-
-      document.querySelectorAll('#nav a').forEach(function (link) {
-        link.addEventListener('click', function () {
-          closeMenu();
-        });
-      });
-
-      document.addEventListener('click', function (event) {
-        var nav = document.querySelector('.nav');
-        var hamburger = document.querySelector('.hamburger');
-        var isMobile = window.matchMedia('(max-width: 768px)').matches;
-        if (!isMobile || !nav || !hamburger || !nav.classList.contains('active')) return;
-
-        var isClickInsideNav = nav.contains(event.target);
-        var isClickOnHamburger = hamburger.contains(event.target);
-
-        if (!isClickInsideNav && !isClickOnHamburger) {
-          closeMenu();
-        }
-      });
-
-      (function () {
-        const slides = document.querySelectorAll('.community-slider .slide');
-        if (slides.length < 2) return;
-
-        let current = 0;
-        setInterval(function () {
-          slides[current].classList.remove('active');
-          current = (current + 1) % slides.length;
-          slides[current].classList.add('active');
-        }, 2500);
-      })();
-
       (function () {
         const btn = document.getElementById('testimonialsMoreBtn');
         const extras = document.querySelectorAll('.testimonial-card--extra');

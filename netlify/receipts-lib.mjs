@@ -153,6 +153,9 @@ export async function submitPaymentProof(store, body) {
   const publicId = text(body.publicId || body.p_cloudinary_public_id);
   if (!token) throw httpError("application token required", 400);
   if (!screenshotUrl) throw httpError("screenshot url required", 400);
+  try {
+    if (new URL(screenshotUrl).protocol !== "https:") throw new Error();
+  } catch { throw httpError("screenshot url must use HTTPS", 400); }
 
   const app = await readJson(store, appKey(token));
   if (!app) throw httpError("application not found", 404);

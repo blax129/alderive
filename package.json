@@ -9,16 +9,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/blax129/nest.git"
+    "url": "git+https://github.com/blax129/alderive.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "type": "commonjs",
   "bugs": {
-    "url": "https://github.com/blax129/nest/issues"
+    "url": "https://github.com/blax129/alderive/issues"
   },
-  "homepage": "https://github.com/blax129/nest#readme",
+  "homepage": "https://github.com/blax129/alderive#readme",
   "dependencies": {
     "@netlify/blobs": "^11.1.3"
   }

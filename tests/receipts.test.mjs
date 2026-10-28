@@ -132,3 +132,27 @@ test("reject lets the applicant submit a new proof", async function () {
   assert.equal(queue[0].status, "pending");
   assert.equal(queue[1].status, "rejected");
 });
+
+test("reject invalid confirmations and protect paid receipts", async () => {
+  process.env.OWNER_PASSWORD = 'correct-horse';
+  const store = memoryStore();
+  const app = await submitApplication(store, {applicationId:'APP-validation'});
+  const proof = await submitPaymentProof(store, {token:app.access_token,screenshotUrl:'https://cdn.example/proof.jpg'});
+  for (const amount of [0,-1,'invalid',100001]) {
+    await assert.rejects(() => ownerConfirmProof(store,{password:'correct-horse',receiptNumber:proof.receipt_number,amount}), /amount received/);
+  }
+  await ownerConfirmProof(store,{password:'correct-horse',receiptNumber:proof.receipt_number,amount:70});
+  await assert.rejects(() => ownerRejectProof(store,{password:'correct-horse',receiptNumber:proof.receipt_number}), /only pending/);
+  assert.equal(await getApplicationByToken(store,{token:'missing'}),null);
+  assert.equal(await getPublicReceiptStatus(store,{receiptNumber:'missing'}),null);
+});
+
+test("HTTP endpoint rejects malformed requests and inherited action names", async () => {
+  const {default:handler}=await import('../netlify/functions/receipts.mjs');
+  assert.equal((await handler(new Request('https://example.test/api/receipts'))).status,405);
+  assert.equal((await handler(new Request('https://example.test/api/receipts',{method:'OPTIONS'}))).status,204);
+  assert.equal((await handler(new Request('https://example.test/api/receipts',{method:'POST',body:'{'}))).status,400);
+  for (const action of ['unknown','constructor','toString','__proto__']) {
+    assert.equal((await handler(new Request('https://example.test/api/receipts',{method:'POST',body:JSON.stringify({action})}))).status,400);
+  }
+});

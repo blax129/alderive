@@ -17,6 +17,8 @@ RESVG = ["npx", "--yes", "@resvg/resvg-js-cli"]
 EXPORTS = [
     ("private-property-logo.svg", "private-property-logo.png", ["--fit-width", "1280", "--background", "transparent"]),
     ("private-property-logo.svg", "private-property-logo-new.png", ["--fit-width", "1280", "--background", "transparent"]),
+    ("private-property-logo.svg", "email-header-logo.png", ["--fit-width", "1200", "--background", "transparent"]),
+    ("logo-icon.svg", "email-ppm-icon.png", ["--fit-width", "256", "--fit-height", "256"]),
     ("logo-icon.svg", "favicon-512.png", ["--fit-width", "512", "--fit-height", "512"]),
     ("logo-icon.svg", "apple-touch-icon.png", ["--fit-width", "180", "--fit-height", "180"]),
     ("logo-icon.svg", "favicon-32.png", ["--fit-width", "32", "--fit-height", "32"]),

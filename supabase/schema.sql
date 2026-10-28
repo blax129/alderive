@@ -1,4 +1,4 @@
--- Private Property Holdings — Slice 1
+-- Alderive Properties — Slice 1
 -- Paste this entire file into Supabase → SQL Editor → Run
 -- Anon cannot read the table; only the two functions below are callable.
 

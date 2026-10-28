@@ -27,13 +27,13 @@ export default async function receipts(request) {
   }
 
   const action = body && body.action;
-  const handler = receiptActions[action];
+  const handler = Object.hasOwn(receiptActions, action) ? receiptActions[action] : null;
   if (!handler) {
     return json({ error: "Unknown action" }, 400);
   }
 
   try {
-    const store = getStore("pph-receipts");
+    const store = getStore({ name: "pph-receipts", consistency: "strong" });
     const result = await handler(store, body || {});
     return json(result == null ? null : result);
   } catch (error) {
