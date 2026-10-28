@@ -17,7 +17,7 @@
     </script>
     <meta
       name="description"
-      content="Application Received — Alderive Properties. Complete your refundable $70 application fee via Chime using the payment email assigned to your Application ID."
+      content="Application Received — Alderive Properties. Complete your refundable application fee of $70 per adult via Chime using the payment email assigned to your Application ID."
     />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Alderive Properties" />
@@ -1047,8 +1047,8 @@
         </div>
       </header>
 
-      <p class="intro-copy" data-en="Your application is almost complete. Please submit the $70 refundable application fee using the secure payment method below." data-es="Su solicitud está casi completa. Envíe el cargo de solicitud reembolsable de $70 usando el método de pago seguro a continuación.">
-        Your application is almost complete. Please submit the $70 refundable application fee using the secure payment method below.
+      <p class="intro-copy" data-en="Your application is almost complete. Please submit the total refundable application fee shown below ($70 per adult) using the secure payment method below." data-es="Su solicitud está casi completa. Envíe el cargo de solicitud reembolsable total indicado a continuación ($70 por adulto) usando el método de pago seguro a continuación.">
+        Your application is almost complete. Please submit the total refundable application fee shown below ($70 per adult) using the secure payment method below.
       </p>
 
       <section class="page-card" aria-labelledby="payment-options-title">
@@ -1064,6 +1064,12 @@
           </div>
         </div>
 
+        <div class="payment-total" aria-live="polite">
+          <p class="payment-detail-label" data-en="Total amount to pay" data-es="Importe total a pagar">Total amount to pay</p>
+          <strong id="paymentTotal">—</strong>
+          <p id="paymentCalculation" data-en="Loading your application total…" data-es="Cargando el total de su solicitud…">Loading your application total…</p>
+          <p data-en="Send this total through Chime to the payment email below." data-es="Envíe este total por Chime al correo de pago indicado abajo.">Send this total through Chime to the payment email below.</p>
+        </div>
         <div class="payment-email-card">
           <div class="payment-detail-row" id="summaryNameRow" hidden>
             <span class="payment-detail-label" data-en="Applicant" data-es="Solicitante">Applicant</span>
@@ -1105,7 +1111,7 @@
             </li>
             <li>
               <div class="step-number">4</div>
-              <div class="step-copy" data-en="Enter the $70 amount." data-es="Ingrese el monto de $70.">Enter the $70 amount.</div>
+              <div class="step-copy" data-en="Enter the total amount shown above." data-es="Ingrese el importe total indicado arriba.">Enter the total amount shown above.</div>
             </li>
             <li>
               <div class="step-number">5</div>
@@ -1370,10 +1376,16 @@
             propertyRow.hidden = false;
           }
 
-          const fee = record && record.application_fee != null ? Number(record.application_fee) : 70;
-          if (feePill && Number.isFinite(fee)) {
-            feePill.setAttribute('data-en', 'Amount: $' + fee.toFixed(0) + ' per adult');
-            feePill.setAttribute('data-es', 'Monto: $' + fee.toFixed(0) + ' por adulto');
+          const fee = record && record.application_fee != null ? Number(record.application_fee) : null;
+          const adults = record && record.adult_applicants ? Number(record.adult_applicants) : 1;
+          if (fee !== null && Number.isFinite(fee)) {
+            document.getElementById('paymentTotal').textContent = '$' + fee.toFixed(2);
+            const calculation = document.getElementById('paymentCalculation');
+            calculation.dataset.en = adults + (adults === 1 ? ' adult' : ' adults') + ' × $70 = $' + fee.toFixed(2);
+            calculation.dataset.es = adults + (adults === 1 ? ' adulto' : ' adultos') + ' × $70 = $' + fee.toFixed(2);
+            calculation.textContent = calculation.dataset[activeLang] || calculation.dataset.en;
+            feePill.dataset.en = 'Total due: $' + fee.toFixed(2);
+            feePill.dataset.es = 'Total a pagar: $' + fee.toFixed(2);
             feePill.textContent = feePill.dataset[activeLang] || feePill.dataset.en;
           }
 
@@ -1395,10 +1407,15 @@
         if (accessToken && typeof window.loadApplicationRecord === 'function') {
           window.loadApplicationRecord(accessToken)
             .then(function (record) {
-              if (record) fillPaymentDetails(record);
+              if (!record) throw new Error('Application not found');
+              fillPaymentDetails(record);
             })
             .catch(function (error) {
-              console.error('[Payment] Supabase load failed', error);
+              console.error('[Payment] Application load failed', error);
+              const calculation = document.getElementById('paymentCalculation');
+              calculation.dataset.en = 'Unable to load your total. Reopen your application link or refresh before paying.';
+              calculation.dataset.es = 'No se pudo cargar el total. Abra el enlace de su solicitud o actualice antes de pagar.';
+              calculation.textContent = calculation.dataset[activeLang] || calculation.dataset.en;
             });
         }
       })();

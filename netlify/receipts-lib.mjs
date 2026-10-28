@@ -71,6 +71,7 @@ function publicApplication(app, proof) {
     applicant_email: app.applicant_email,
     applicant_phone: app.applicant_phone,
     property_address: app.property_address,
+    adult_applicants: app.adult_applicants || 1,
     application_fee: app.application_fee,
     confirmed_amount: confirmed,
     receipt_amount: confirmed != null ? confirmed : app.application_fee,
@@ -111,11 +112,16 @@ export async function submitApplication(store, body) {
       return {
         application_id: existing.application_id,
         access_token: existing.access_token,
+        adult_applicants: existing.adult_applicants || 1,
         application_fee: existing.application_fee,
       };
     }
   }
 
+  const adultApplicants = body.adultApplicants == null ? 1 : Number(body.adultApplicants);
+  if (!Number.isSafeInteger(adultApplicants) || adultApplicants < 1 || adultApplicants * FEE > 100000) {
+    throw httpError("enter a valid number of adult applicants", 400);
+  }
   const token = crypto.randomUUID();
   const record = {
     application_id: applicationId,
@@ -124,7 +130,8 @@ export async function submitApplication(store, body) {
     applicant_email: text(body.applicantEmail || body.p_applicant_email),
     applicant_phone: text(body.applicantPhone || body.p_applicant_phone),
     property_address: text(body.propertyAddress || body.p_property_address),
-    application_fee: FEE,
+    adult_applicants: adultApplicants,
+    application_fee: FEE * adultApplicants,
     payment_email: text(body.paymentEmail || body.p_payment_email),
     created_at: new Date().toISOString(),
   };
@@ -134,6 +141,7 @@ export async function submitApplication(store, body) {
   return {
     application_id: record.application_id,
     access_token: record.access_token,
+    adult_applicants: record.adult_applicants,
     application_fee: record.application_fee,
   };
 }
@@ -177,6 +185,7 @@ export async function submitPaymentProof(store, body) {
       applicant_email: app.applicant_email,
       applicant_phone: app.applicant_phone,
       property_address: app.property_address,
+      adult_applicants: app.adult_applicants || 1,
       application_fee: app.application_fee,
       payment_email: app.payment_email,
       receipt_number: number,

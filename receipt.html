@@ -216,7 +216,7 @@
           fill('applicationId', record.application_id);
           fill('receiptNumber', record.receipt_number);
           const fee = Number(record.application_fee);
-          fill('fee', (Number.isFinite(fee) ? '$' + fee.toFixed(0) : '$70') + (spanish ? ' por adulto' : ' per adult'));
+          fill('fee', '$' + fee.toFixed(2) + ' (' + (record.adult_applicants || 1) + (spanish ? ' × $70 por adulto)' : ' × $70 per adult)'));
           fill('submittedAt', when(record.submitted_at));
           if (status === 'paid') {
             doc.classList.add('is-paid');

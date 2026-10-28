@@ -156,3 +156,26 @@ test("HTTP endpoint rejects malformed requests and inherited action names", asyn
     assert.equal((await handler(new Request('https://example.test/api/receipts',{method:'POST',body:JSON.stringify({action})}))).status,400);
   }
 });
+
+test('adult count determines the saved fee, proof, and receipt total', async () => {
+  for (const count of [1,2,3,6]) {
+    const store = memoryStore();
+    const saved = await submitApplication(store,{applicationId:'COUNT-'+count,adultApplicants:count,application_fee:1});
+    assert.equal(saved.application_fee,count*70);
+    const record=await getApplicationByToken(store,{token:saved.access_token});
+    assert.equal(record.adult_applicants,count);
+    assert.equal(record.receipt_amount,count*70);
+    await submitPaymentProof(store,{token:saved.access_token,screenshotUrl:'https://example.test/proof.png'});
+    process.env.OWNER_PASSWORD='correct-horse';
+    const queue=await ownerListProofs(store,{password:'correct-horse'});
+    assert.equal(queue[0].application_fee,count*70);
+    const retry=await submitApplication(store,{applicationId:'COUNT-'+count,adultApplicants:99});
+    assert.equal(retry.application_fee,count*70);
+  }
+});
+
+test('invalid adult counts cannot create an application', async () => {
+  for(const count of [0,-1,1.5,'5+','',1429]) {
+    await assert.rejects(()=>submitApplication(memoryStore(),{applicationId:'INVALID',adultApplicants:count}),/valid number of adult/);
+  }
+});

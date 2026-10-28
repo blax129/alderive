@@ -198,6 +198,8 @@
         grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
+      .application-fee-notice { padding:16px; border:1px solid var(--brand); border-radius:12px; background:var(--panel-2); }
+      .application-fee-notice strong { display:block; margin-bottom:4px; }
       .co-applicant-choice { min-width:0; margin:24px 0 0; padding:0; border:0; }
       .co-applicant-options { display:flex; flex-wrap:wrap; gap:12px; margin-top:8px; }
       .co-applicant-option { display:flex; align-items:center; gap:10px; min-height:44px; padding:8px 16px; border:1px solid var(--stroke); border-radius:10px; cursor:pointer; }
@@ -997,15 +999,9 @@
               </label>
 
               <label class="field">
-                <span class="field__label" data-en="Number of Adult Applicants" data-es="Número de solicitantes adultos">Number of Adult Applicants</span>
-                <span class="application-select"><select class="field__input" name="adult_applicants">
-                  <option value="" data-en="Select" data-es="Seleccionar">Select</option>
-                  <option>1</option>
-                  <option>2</option>
-                  <option>3</option>
-                  <option>4</option>
-                  <option>5+</option>
-                </select></span>
+                <span class="field__label"><span data-en="Number of Adult Applicants" data-es="Número de solicitantes adultos">Number of Adult Applicants</span> <span class="required-mark">*</span></span>
+                <input class="field__input" type="number" name="adult_applicants" min="1" max="1428" step="1" required inputmode="numeric" placeholder="1" aria-describedby="adultFeeHelp" />
+                <span id="adultFeeHelp" class="help-text" data-en="Include every adult (18+) who will live in the property, including yourself and any co-applicant. $70 per adult." data-es="Incluya a todos los adultos (18+) que vivirán en la propiedad, incluido usted y cualquier cosolicitante. $70 por adulto.">Include every adult (18+) who will live in the property, including yourself and any co-applicant. $70 per adult.</span>
               </label>
 
               <label class="field">
@@ -1086,8 +1082,9 @@
 
           <section class="form-block" aria-labelledby="agreement">
             <h2 id="agreement" class="form-block__title" data-en="Final Step Important (Read Before Submitting)" data-es="Paso final importante (lea antes de enviar)">Final Step Important (Read Before Submitting)</h2>
-            <p class="help-text" data-en="After submitting your application, you will be taken to the payment page to send the refundable $70 application fee through Chime to the payment email assigned to your Application ID. Your application review will begin once payment is received." data-es="Después de enviar su solicitud, será dirigido a la página de pago para enviar el cargo de solicitud reembolsable de $70 por Chime al correo de pago asignado a su ID de solicitud. La revisión de su solicitud comenzará una vez que se reciba el pago.">
-              After submitting your application, you will be taken to the payment page to send the refundable $70 application fee through Chime to the payment email assigned to your Application ID. Your application review will begin once payment is received.
+            <p class="application-fee-notice"><strong data-en="Application fee: $70 per adult (18+)." data-es="Cargo de solicitud: $70 por adulto (18+).">Application fee: $70 per adult (18+).</strong> <span data-en="Your total is the number of adult applicants × $70. You will see the exact amount on the next page." data-es="El total es el número de solicitantes adultos × $70. Verá el importe exacto en la página siguiente.">Your total is the number of adult applicants × $70. You will see the exact amount on the next page.</span></p>
+            <p class="help-text" data-en="After submitting your application, you will be taken to the payment page to send the refundable application fee of $70 per adult through Chime to the payment email assigned to your Application ID. Your application review will begin once payment is received." data-es="Después de enviar su solicitud, será dirigido a la página de pago para enviar el cargo de solicitud reembolsable de $70 por adulto por Chime al correo de pago asignado a su ID de solicitud. La revisión de su solicitud comenzará una vez que se reciba el pago.">
+              After submitting your application, you will be taken to the payment page to send the refundable application fee of $70 per adult through Chime to the payment email assigned to your Application ID. Your application review will begin once payment is received.
             </p>
             <div class="checkbox-group">
               <div class="agreement-item">
@@ -1096,7 +1093,7 @@
                 </div>
                 <div class="agreement-item__row">
                   <input id="applicationAcknowledgement" type="checkbox" name="application_acknowledgement" required />
-                  <label for="applicationAcknowledgement" data-en="I understand that after submission I must pay the refundable $70 application fee through Chime to the payment email assigned to my Application ID (shown on the next page) and include my Application ID in the payment note." data-es="Entiendo que después del envío debo pagar el cargo de solicitud reembolsable de $70 por Chime al correo de pago asignado a mi ID de solicitud (mostrado en la página siguiente) e incluir mi ID de solicitud en la nota del pago.">I understand that after submission I must pay the refundable $70 application fee through Chime to the payment email assigned to my Application ID (shown on the next page) and include my Application ID in the payment note.</label>
+                  <label for="applicationAcknowledgement" data-en="I understand that after submission I must pay the refundable application fee of $70 per adult through Chime to the payment email assigned to my Application ID (shown on the next page) and include my Application ID in the payment note." data-es="Entiendo que después del envío debo pagar el cargo de solicitud reembolsable de $70 por adulto por Chime al correo de pago asignado a mi ID de solicitud (mostrado en la página siguiente) e incluir mi ID de solicitud en la nota del pago.">I understand that after submission I must pay the refundable application fee of $70 per adult through Chime to the payment email assigned to my Application ID (shown on the next page) and include my Application ID in the payment note.</label>
                 </div>
               </div>
             </div>
@@ -1221,6 +1218,15 @@
           localStorage.setItem('chimePaymentEmail', paymentEmail);
 
           const formData = new FormData(form);
+          const adultApplicants = Number(formData.get('adult_applicants'));
+          if (!Number.isSafeInteger(adultApplicants) || adultApplicants < 1 || adultApplicants > 1428) {
+            statusText.textContent = activeLang === 'es' ? 'Ingrese el número de solicitantes adultos.' : 'Enter the number of adult applicants.';
+            submitButton.disabled = false;
+            form.elements.adult_applicants.focus();
+            return;
+          }
+          formData.set('application_fee_per_adult', '70');
+          formData.set('application_fee_total', String(adultApplicants * 70));
           localStorage.setItem('applicantName', formData.get('fullLegalName') || '');
           localStorage.setItem('applicantEmail', formData.get('email') || '');
           localStorage.setItem('applicantPhone', formData.get('phone') || '');
@@ -1232,6 +1238,7 @@
             try {
               const saved = await window.saveApplicationRecord({
                 applicationId: appId,
+                adultApplicants: adultApplicants,
                 applicantName: formData.get('fullLegalName') || '',
                 applicantEmail: formData.get('email') || '',
                 applicantPhone: formData.get('phone') || '',
@@ -1256,6 +1263,8 @@
             fullLegalName: formData.get('fullLegalName') || '',
             email: formData.get('email') || '',
             phone: formData.get('phone') || '',
+            adult_applicants: adultApplicants,
+            application_fee_total: adultApplicants * 70,
             application_id: appId,
             payment_email: paymentEmail,
           };
