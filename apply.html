@@ -1147,6 +1147,10 @@
             email: 'test@example.com',
             phone: '555-0100',
             application_id: testAppId,
+            adult_applicants: 2,
+            application_fee_total: '140.00',
+            co_applicant_status: 'Yes',
+            payment_url: new URL('apply.html', window.location.href).toString(),
             payment_email:
               typeof window.getChimePaymentEmail === 'function'
                 ? window.getChimePaymentEmail(testAppId)
@@ -1259,23 +1263,21 @@
             }
           }
 
+          const paymentUrl = new URL('application-received.html', window.location.href);
+          paymentUrl.search = new URLSearchParams({ id: appId, token: accessToken, lang: activeLang }).toString();
+          paymentUrl.hash = '';
           const emailPayload = {
             fullLegalName: formData.get('fullLegalName') || '',
             email: formData.get('email') || '',
             phone: formData.get('phone') || '',
             adult_applicants: adultApplicants,
-            application_fee_total: adultApplicants * 70,
+            application_fee_total: (adultApplicants * 70).toFixed(2),
+            payment_url: paymentUrl.toString(),
+            co_applicant_status: formData.get('has_co_applicant') === 'yes' ? 'Yes' : 'No',
             application_id: appId,
             payment_email: paymentEmail,
           };
 
-
-          try {
-            const emailResult = await emailjs.send(serviceID, templateID, emailPayload);
-            console.log('[RentalForm] EmailJS success:', emailResult);
-          } catch (emailError) {
-            console.error('[RentalForm] EmailJS failed (Formspree will still run):', formatEmailJSError(emailError));
-          }
 
           try {
             const response = await fetch(form.action, {
@@ -1285,6 +1287,11 @@
             });
 
             if (response.ok) {
+              try {
+                await emailjs.send(serviceID, templateID, emailPayload);
+              } catch (emailError) {
+                console.error('[RentalForm] Application saved but confirmation email failed:', formatEmailJSError(emailError));
+              }
               console.log('[RentalForm] Formspree success, redirecting.');
               const destination = activeLang === 'es'
                 ? 'es-application-received.html'

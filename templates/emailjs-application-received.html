@@ -1,88 +1,52 @@
-<!--
-  EmailJS template HTML
-  Paste this into EmailJS → Email Templates → your template → Content (HTML)
-
-  Variables used (must match apply.html payload):
-  - {{fullLegalName}}
-  - {{application_id}}
-  - {{email}}
-  - {{phone}}
-  - {{payment_email}}
--->
-<div style="margin:0;padding:0;background:#f4f6f8;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:#1a2332;font-size:16px;line-height:1.6;">
-  <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="background:#f4f6f8;padding:24px 12px;">
-    <tr>
-      <td align="center">
-        <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="max-width:600px;background:#ffffff;border-radius:12px;overflow:hidden;border:1px solid #e5e9ef;">
-          <!-- Compact centered PPM icon (not a wide banner) -->
-          <tr>
-            <td align="center" style="padding:28px 24px 18px 24px;background:#ffffff;">
-              <img
-                src="https://cdn.jsdelivr.net/gh/blax129/nest@main/images/favicon-512.png"
-                alt="Alderive Properties"
-                width="88"
-                height="88"
-                style="display:block;width:88px;height:88px;border:0;outline:none;text-decoration:none;margin:0 auto;"
-              />
-            </td>
-          </tr>
-
-          <!-- Body -->
-          <tr>
-            <td style="padding:8px 28px 8px 28px;">
-              <p style="margin:0 0 16px 0;">Hello {{fullLegalName}},</p>
-
-              <p style="margin:0 0 16px 0;">
-                Thank you for submitting your rental application with
-                <strong>Alderive Properties</strong>.
-              </p>
-
-              <p style="margin:0 0 16px 0;">
-                <strong>Application ID:</strong> {{application_id}}
-              </p>
-
-              <p style="margin:0 0 16px 0;">
-                Your application has been received successfully and is currently pending the next step.
-              </p>
-
-              <p style="margin:0 0 16px 0;">
-                To proceed, please complete the <strong>refundable application fee</strong> using the details below:
-              </p>
-
-              <h3 style="margin:24px 0 12px 0;font-size:18px;color:#0A1628;">Payment Details</h3>
-
-              <p style="margin:0 0 8px 0;"><strong>Payment Method:</strong> Chime</p>
-              <p style="margin:0 0 8px 0;"><strong>Send Payment To:</strong> {{payment_email}}</p>
-              <p style="margin:0 0 20px 0;"><strong>Application Fee:</strong> $70 per adult applicant</p>
-
-              <p style="margin:0 0 8px 0;"><strong>Note:</strong></p>
-              <p style="margin:0 0 16px 0;">
-                Only one application needs to be submitted per household, but the screening fee applies to each adult (18+) who will be living in the property.
-              </p>
-
-              <p style="margin:0 0 16px 0;">
-                After making payment, upload a screenshot of your payment confirmation on the payment page.
-              </p>
-
-              <p style="margin:0 0 16px 0;">
-                Once payment is confirmed, your application will move forward for review.
-              </p>
-
-              <p style="margin:0 0 24px 0;">
-                If you have any questions, feel free to reply directly to this email—we're happy to assist.
-              </p>
-
-              <p style="margin:0 0 4px 0;">Best regards,</p>
-              <p style="margin:0 0 24px 0;">
-                <strong>Alderive Properties</strong><br />
-                <a href="mailto:info@alderiveproperties.com" style="color:#2F4A6D;text-decoration:none;">
-                  info@alderiveproperties.com
-                </a>
-              </p>
-            </td>
-          </tr>
-        </table>
-      </td>
-    </tr>
+<!-- EmailJS template_5tabhtc
+Subject: Application received — {{application_id}} | Alderive Properties
+To Email: {{email}}
+From Name: Alderive Properties
+Reply-To: info@alderiveproperties.com
+Keep From Email set to the authenticated sender in your connected email service.
+Variables supplied by apply.html: fullLegalName, application_id, adult_applicants,
+application_fee_total, payment_email, payment_url, co_applicant_status.
+Paste the HTML below into EmailJS's HTML editor. -->
+<div style="margin:0;padding:0;background:#f5f2e8;color:#1e2926;font-family:Arial,Helvetica,sans-serif;font-size:16px;line-height:1.6;">
+  <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="background:#f5f2e8;">
+    <tr><td align="center" style="padding:24px 12px;">
+      <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="max-width:600px;background:#fffefb;border:1px solid #dce3da;border-radius:16px;">
+        <tr><td align="center" style="padding:28px 24px;background:#fffefb;border-bottom:1px solid #dce3da;">
+          <img src="https://raw.githubusercontent.com/blax129/alderive/main/images/email-header-logo.png" alt="Alderive Properties" width="280" style="display:block;width:280px;max-width:100%;height:auto;border:0;outline:none;text-decoration:none;" />
+        </td></tr>
+        <tr><td style="padding:28px 24px;">
+          <p style="margin:0 0 8px;color:#52665b;font-size:12px;font-weight:bold;letter-spacing:1px;text-transform:uppercase;">Application received</p>
+          <h1 style="margin:0 0 20px;color:#17483f;font-size:26px;line-height:1.3;">Thank you for applying</h1>
+          <p style="margin:0 0 16px;">Hello {{fullLegalName}},</p>
+          <p style="margin:0 0 20px;">We have received your rental application with <strong>Alderive Properties</strong>. The next step is to submit your refundable application fee and upload your payment confirmation.</p>
+          <p style="margin:0 0 8px;overflow-wrap:anywhere;"><strong>Application ID:</strong> {{application_id}}</p>
+          <p style="margin:0 0 20px;"><strong>Co-applicant included:</strong> {{co_applicant_status}}</p>
+          <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0" style="background:#e8ede6;border:1px solid #cad8cd;border-radius:12px;">
+            <tr><td style="padding:20px;">
+              <p style="margin:0 0 4px;color:#17483f;font-weight:bold;">Total amount to pay</p>
+              <p style="margin:0 0 8px;color:#17483f;font-size:34px;font-weight:bold;line-height:1.25;">${{application_fee_total}}</p>
+              <p style="margin:0;">{{adult_applicants}} adult applicant(s) × <strong>$70 per adult (18+)</strong></p>
+            </td></tr>
+          </table>
+          <p style="margin:16px 0 20px;color:#52665b;font-size:14px;">The fee applies to every adult who will live in the property, including the primary applicant and any adult co-applicant. The total above uses the adult count entered on your application.</p>
+          <h2 style="margin:0 0 12px;font-size:19px;color:#17483f;">Complete your payment</h2>
+          <p style="margin:0 0 12px;"><strong>1.</strong> Send <strong>${{application_fee_total}}</strong> using <strong>Chime Pay Anyone</strong> to your assigned payment email:</p>
+          <p style="margin:0 0 12px;padding:12px;background:#f5f2e8;overflow-wrap:anywhere;word-break:break-word;"><strong>{{payment_email}}</strong></p>
+          <p style="margin:0 0 12px;"><strong>2.</strong> Include <strong>{{application_id}}</strong> in the payment note.</p>
+          <p style="margin:0 0 20px;"><strong>3.</strong> Open your payment page below and upload a screenshot of the payment confirmation.</p>
+          <table role="presentation" cellspacing="0" cellpadding="0" border="0" style="margin:0 0 20px;">
+            <tr><td align="center" bgcolor="#17483f" style="border-radius:8px;">
+              <a href="{{payment_url}}" style="display:inline-block;padding:14px 20px;border:1px solid #17483f;border-radius:8px;color:#ffffff;text-decoration:none;font-weight:bold;">Open your payment page</a>
+            </td></tr>
+          </table>
+          <p style="margin:0 0 20px;font-size:13px;color:#52665b;">If the button does not work, copy this link into your browser:<br /><a href="{{payment_url}}" style="color:#17483f;overflow-wrap:anywhere;word-break:break-all;">{{payment_url}}</a></p>
+          <p style="margin:0 0 16px;">Once payment is verified, your application can move forward for review. Uploading a screenshot does not itself confirm that funds have been received.</p>
+          <p style="margin:0 0 20px;">If you have already submitted payment and uploaded your confirmation, <strong>do not pay again</strong>. Keep your application link private and contact us if you need help.</p>
+          <p style="margin:0 0 4px;">Best regards,</p>
+          <p style="margin:0;"><strong>Alderive Properties</strong><br /><a href="mailto:info@alderiveproperties.com" style="color:#17483f;text-decoration:underline;overflow-wrap:anywhere;">info@alderiveproperties.com</a></p>
+        </td></tr>
+        <tr><td style="padding:16px 24px;border-top:1px solid #dce3da;color:#52665b;font-size:12px;">This email acknowledges your application. It is not a payment receipt or an approval of your rental application.</td></tr>
+      </table>
+    </td></tr>
   </table>
 </div>
