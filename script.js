@@ -248,14 +248,11 @@
 
 /** Chime Pay Anyone emails assigned by Application ID (stable hash). */
 window.CHIME_PAYMENT_EMAILS = [
-  "info.privatenest@gmail.com",
-  "applications.privatenest@gmail.com",
-  "privatenesthq@gmail.com",
-  "privatenestco@gmail.com",
-  "privatenestholdings@gmail.com",
-  "contact.privatenest@gmail.com",
-  "office.privatenest@gmail.com",
-  "admin.privatenest@gmail.com",
+  "careersalderiveproperties@gmail.com",
+  "alderiveproperties@gmail.com",
+  "alderiveproperty@gmail.com",
+  "alderivepropertiesllc@gmail.com",
+  "alderivepropertiesus@gmail.com",
 ];
 
 /** Unsigned Cloudinary upload for payment screenshots (payment page). */

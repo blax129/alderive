@@ -1261,7 +1261,7 @@
       </div>
     </main>
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-    <script src="./script.js"></script>
+    <script src="./script.js?v=payment-emails-20261031"></script>
     <script>
       (function () {
         const btn = document.getElementById('backBtn');
@@ -1357,10 +1357,10 @@
           const propertyAddress = (record && record.property_address) || localStorage.getItem('propertyAddress') || '';
           const storedPaymentEmail = (record && record.payment_email) || localStorage.getItem('chimePaymentEmail') || '';
           const paymentEmail =
-            storedPaymentEmail ||
+            (window.CHIME_PAYMENT_EMAILS.includes(storedPaymentEmail) ? storedPaymentEmail : "") ||
             (typeof window.getChimePaymentEmail === 'function'
               ? window.getChimePaymentEmail(applicationId)
-              : 'info.privatenest@gmail.com');
+              : 'careersalderiveproperties@gmail.com');
 
           if (emailEl && paymentEmail) {
             emailEl.textContent = paymentEmail;

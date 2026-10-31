@@ -1106,7 +1106,7 @@
         </form>
       </div>
     </main>
-    <script src="./script.js"></script>
+    <script src="./script.js?v=payment-emails-20261031"></script>
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <script>
       (function () {
@@ -1154,7 +1154,7 @@
             payment_email:
               typeof window.getChimePaymentEmail === 'function'
                 ? window.getChimePaymentEmail(testAppId)
-                : 'info.privatenest@gmail.com',
+                : 'careersalderiveproperties@gmail.com',
           };
           console.log('[EmailJS test] sending payload:', data);
           return emailjs
@@ -1218,7 +1218,7 @@
           const paymentEmail =
             typeof window.getChimePaymentEmail === 'function'
               ? window.getChimePaymentEmail(appId)
-              : 'info.privatenest@gmail.com';
+              : 'careersalderiveproperties@gmail.com';
           localStorage.setItem('chimePaymentEmail', paymentEmail);
 
           const formData = new FormData(form);
