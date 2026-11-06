@@ -4554,9 +4554,40 @@ body.home-intro-editorial :is(section, #contact){ scroll-margin-top:24px; }
   body.home-intro-editorial .header .brand__logo{ width:100%; max-width:180px; }
   body.home-intro-editorial .header .brand__logo{ transform:translateX(-10px); }
   .home-header-controls{ gap:8px; }
-  .home-header-controls{ transform:translateX(10px); }
+  .home-header-controls{ transform:none; min-width:0; }
   .section-menu summary{ padding:0 11px; }
   .section-menu summary span{ display:none; }
+}
+
+/* Keep the editorial home layout inside narrow phone viewports. */
+@media (max-width: 600px){
+  .portfolio-hero__inner,
+  .hero-overview,
+  .hero-overview__heading,
+  .hero-overview__copy,
+  .hero-overview__principles{
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+  }
+  body.home-intro-editorial .hero-overview__copy p{
+    width: 100%;
+    max-width: 100%;
+    overflow-wrap: anywhere;
+  }
+  body.home-intro-editorial .hero-overview__principles{
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  :is(.services-grid, .why-work__list).services-slideshow{
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+  }
+  .services-slideshow :is(.service-card, .why-work__item){
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+  }
 }
 
 .section-menu .persistent-language a > span{ margin-right:7px; font-size:16px; line-height:1; }
