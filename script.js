@@ -349,7 +349,7 @@ window.receiptPageUrl = function receiptPageUrl(token) {
 };
 
 window.adminPageUrl = function adminPageUrl() {
-  const url = new URL("admin.html", window.location.href);
+  const url = new URL("https://alderiveproperty.com/admin.html");
   url.search = "";
   return url.toString();
 };
